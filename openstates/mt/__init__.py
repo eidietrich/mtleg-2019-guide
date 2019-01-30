@@ -16,29 +16,30 @@ class Montana(Jurisdiction):
         # 'committees': MTCommitteeScraper,
         'bills': MTBillScraper,
     }
+    # Only interested in 2019 session currently
     legislative_sessions = [
-        {
-            "_scraped_name": "20111",
-            "identifier": "2011",
-            "name": "2011 Regular Session"
-        },
-        {
-            "_scraped_name": "20131",
-            "identifier": "2013",
-            "name": "2013 Regular Session"
-        },
-        {
-            "_scraped_name": "20151",
-            "identifier": "2015",
-            "name": "2015 Regular Session"
-        },
-        {
-            "_scraped_name": "20171",
-            "identifier": "2017",
-            "name": "2017 Regular Session",
-            "start_date": "2017-01-02",
-            "end_date": "2017-04-28"
-        },
+        # {
+        #     "_scraped_name": "20111",
+        #     "identifier": "2011",
+        #     "name": "2011 Regular Session"
+        # },
+        # {
+        #     "_scraped_name": "20131",
+        #     "identifier": "2013",
+        #     "name": "2013 Regular Session"
+        # },
+        # {
+        #     "_scraped_name": "20151",
+        #     "identifier": "2015",
+        #     "name": "2015 Regular Session"
+        # },
+        # {
+        #     "_scraped_name": "20171",
+        #     "identifier": "2017",
+        #     "name": "2017 Regular Session",
+        #     "start_date": "2017-01-02",
+        #     "end_date": "2017-04-28"
+        # },
         {
             "_scraped_name": "20191",
             "identifier": "2019",
@@ -57,6 +58,13 @@ class Montana(Jurisdiction):
         '20031',
         '20011',
         '19991',
+        # adding for limiting scrapes to 2019
+        '20111',
+        '20131',
+        '20151',
+        '20171',
+
+
     ]
 
     def get_organizations(self):

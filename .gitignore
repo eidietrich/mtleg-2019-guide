@@ -3,6 +3,7 @@ data
 cache
 _cache
 _data
+NOTES.md
 
 # Setting-overrides that should not be shared
 local_settings.*py
@@ -30,6 +31,7 @@ site/openstates
 *.class
 *.jar
 +*.sublime*
+.vscode/
 venv
 
 # Binary data files and dumps, from Open States and state websites

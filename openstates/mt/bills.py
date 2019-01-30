@@ -177,6 +177,11 @@ class MTBillScraper(Scraper, LXMLMixin):
             classification = 'concurrent resolution'
         elif 'r' in _bill_id:
             classification = 'resolution'
+        elif 'lc' in _bill_id:
+            # PDF bill text link is still pointing to a bill draft for some reason
+            # Happening with some recently introduced bills
+            classification = 'proposed bill'
+        # else: print('BILL_ID_ERROR', _bill_id)
 
         bill = Bill(bill_id, legislative_session=session, chamber=chamber,
                     title=title, classification=classification)
@@ -243,22 +248,26 @@ class MTBillScraper(Scraper, LXMLMixin):
                 actor = actor_map[action.xpath("td[1]")[0].text_content().split(" ")[0]]
                 action_name = action.xpath("td[1]")[0].text_content().replace(actor, ""
                                                                               )[4:].strip()
+                action_committee = action.xpath("td[5]")[0].text_content()
             except KeyError:
                 action_name = action.xpath("td[1]")[0].text_content().strip()
                 actor = 'legislature' if action_name == 'Chapter Number Assigned' else ''
-
+            
             action_name = action_name.replace("&nbsp", "")
             action_date = datetime.strptime(action.xpath("td[2]")[0].text, '%m/%d/%Y').date()
             action_type = actions.categorize(action_name)
 
             if 'by senate' in action_name.lower():
                 actor = 'upper'
-
+            
+            action_committee = action_committee.replace('&nbsp','')
+            
             bill.add_action(
                 action_name,
                 action_date,
                 classification=action_type,
-                chamber=actor
+                chamber=actor,
+                extras= {'committee': action_committee},
             )
 
     def _versions_dict(self, session):
