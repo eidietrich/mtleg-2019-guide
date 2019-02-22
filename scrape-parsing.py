@@ -3,7 +3,7 @@
 import json
 import glob
 
-outpath = 'data-processed/scrape-2019-02-21.json'
+out_path = 'data-processed/scrape-2019-MM-DD.json'
 
 # Utility functions
 def get_js(path):
