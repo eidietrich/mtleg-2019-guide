@@ -1,79 +1,83 @@
 export const IMPORTANT_ACTIONS = [
   
-  {key: 'Introduced', color: '#ffffbf', sort: 2},
+  {key: 'Introduced', color: '#ffffbf', glyph: 'Intro', sort: 2},
   /// COMMITTEE
-  // routine procedural - yellow
-  {key: 'First Reading', color: '#ffffbf', sort: 2, position: 1},
-  {key: 'Referred to Committee', color: '#ffffbf', sort: 2},
+  // procedural - yellow
+  {key: 'First Reading', color: '#ffffbf', glyph: '1st', sort: 2, position: 1},
+  {key: 'Referred to Committee', color: '#ffffbf', glyph: '→Cmt', sort: 2},
+  {key: 'Rereferred to Committee', color: '#ffffbf', glyph: '↩Cmt', sort: 2},
+
+  {key: 'Committee Report--Bill Passed', color: '#ffffbf', glyph: '→Floor', sort: 2},
+  {key: 'Committee Report--Bill Passed as Amended', color: '#ffffbf', glyph: '→Floor', sort: 2},
+  {key: 'Committee Report--Bill Concurred as Amended', color: '#ffffbf', glyph: '→Floor', sort: 2},
+  {key: 'Committee Report--Bill Concurred', color: '#ffffbf', glyph: '→Floor', sort: 2},
+  // {key: 'Committee Report--Bill Not Passed', color: '#fc8d59', glyph: '→Floor', sort: 1},
   
   // hearing
-  {key: 'Hearing', color: '#dfc27d', sort: 2},
+  {key: 'Hearing', color: '#dfc27d', glyph: 'Hear', sort: 2},
   
-  // strange procedural - purple (for now)
-  // {key: 'Hearing Canceled', color: '#d8daeb', sort: 2},
-  {key: 'Rereferred to Committee', color: '#d8daeb', sort: 2},
-
   // move forward - green
   // {key: 'Committee Report--Bill Passed', color: '#91cf60', sort: 0},
-  {key: 'Committee Executive Action--Bill Passed', color: '#91cf60', sort: 0},
+  {key: 'Committee Executive Action--Bill Passed', color: '#91cf60', glyph: '✓Cmt', sort: 0},
   // {key: 'Committee Report--Bill Passed as Amended', color: '#91cf60', sort: 0},
-  {key: 'Committee Executive Action--Bill Passed as Amended', color: '#91cf60', sort: 0},
+  {key: 'Committee Executive Action--Bill Passed as Amended', color: '#91cf60', glyph: 'ΔCmt', sort: 0},
   // {key: 'Committee Report--Bill Concurred', color: '#91cf60', sort: 0},
-  {key: 'Committee Executive Action--Bill Concurred', color: '#91cf60', sort: 0},
-  {key: 'Committee Executive Action--Bill Concurred as Amended', color: '#91cf60', sort: 0},
+  {key: 'Committee Executive Action--Bill Concurred', color: '#91cf60', glyph: '✓Cmt', sort: 0},
+  {key: 'Committee Executive Action--Bill Concurred as Amended', color: '#91cf60', glyph: 'ΔCmt', sort: 0},
   
   // dead - red
-  {key: 'Tabled in Committee', color: '#fc8d59', sort: 1},
-  {key: 'Bill Not Heard at Sponsor\'s Request', color: '#fc8d59', sort: 1},
-  {key: 'Bill Withdrawn per House Rule H30-50(3)(b)', color: '#fc8d59', sort: 1},
-  {key: 'Committee Executive Action--Bill Not Passed', color: '#fc8d59', sort: 1},
+  {key: 'Tabled in Committee', color: '#fc8d59', glyph: '↓Cmt', sort: 1},
+  {key: 'Bill Not Heard at Sponsor\'s Request', color: '#fc8d59', glyph: '✗Spn', sort: 1},
+  {key: 'Bill Withdrawn per House Rule H30-50(3)(b)', color: '#fc8d59', glyph: '✗Spn', sort: 1},
+  {key: 'Committee Executive Action--Bill Not Passed', color: '#fc8d59', glyph: '✗Cmt', sort: 1},
+  
   
   // NON-COMMITTEE
   // Procedural
   
-  {key: 'Transmitted to Senate', color: '#ffffbf', sort: 2},
-  {key: 'Transmitted to House', color: '#ffffbf', sort: 2},
-  {key: 'Transmitted to Governor', color: '#ffffbf', sort: 2},
-  // {key: 'Scheduled for 2nd Reading', color: '#ffffbf', sort: 2},
-  // {key: 'Scheduled for 3rd Reading', color: '#ffffbf', sort: 2},
-  // {key: '2nd Reading Pass Consideration', color: '#ffffbf', sort: 2},
-  // {key: '2nd Reading Passed Consideration', color: '#ffffbf', sort: 2},
-  {key: 'Reconsidered Previous Action; Remains in 3rd Reading Process', color: '#ffffbf', sort: 2},
-  {key: 'Taken from 2nd Reading; Rereferred to Committee', color: '#ffffbf', sort: 2},
-  {key: 'Returned to House with Amendments', color: '#ffffbf', sort: 2},
-  {key: 'Taken from Table in Committee', color: '#ffffbf', sort: 2},
-  {key: 'Motion Failed', color: '#ffffbf', sort: 2},
-  {key: "Reconsidered Previous Action; Remains in 2nd Reading Process", color: '#ffffbf', sort: 2},
+  {key: 'Transmitted to Senate', color: '#66c2a5', glyph: '→Sen', sort: 2},
+  {key: 'Transmitted to House', color: '#66c2a5', glyph: '→House', sort: 2},
+  {key: 'Transmitted to Governor', color: '#66c2a5', glyph: '→Gov', sort: 2},
+
+  {key: 'Reconsidered Previous Action; Remains in 3rd Reading Process', color: '#ffffbf', glyph: '[]', sort: 2},
+  {key: 'Taken from 2nd Reading; Rereferred to Committee', color: '#ffffbf', glyph: '[]', sort: 2},
+  {key: 'Returned to House with Amendments', color: '#ffffbf', glyph: '[]', sort: 2},
+  {key: 'Taken from Table in Committee', color: '#ffffbf', glyph: '↑', sort: 2},
+  {key: 'Motion Failed', color: '#ffffbf', glyph: '[]', sort: 2},
+  {key: "Reconsidered Previous Action; Remains in 2nd Reading Process", glyph: '[]', color: '#ffffbf', sort: 2},
   
-  // amendment - purple
-  {key: '2nd Reading Motion to Amend Carried', color: '#d8daeb', sort: 2},
-  {key: '2nd Reading Motion to Amend Failed', color: '#d8daeb', sort: 2},
+  // floor amendment
+  {key: '2nd Reading Motion to Amend Carried', color: '#ffffbf', glyph: 'Δ', sort: 2},
+  {key: '2nd Reading Motion to Amend Failed', color: '#ffffbf', glyph: '◇', sort: 2},
   
   // move forward
-  {key: '2nd Reading Passed', color: '#91cf60', sort: 0},
-  {key: '2nd Reading Passed as Amended', color: '#91cf60', sort: 0},
-  {key: '3rd Reading Passed', color: '#91cf60', sort: 0},
-  {key: '2nd Reading Concurred', color: '#91cf60', sort: 0},
-  {key: '2nd Reading Concurred as Amended', color: '#91cf60', sort: 0},
-  {key: '2nd Reading Senate Amendments Concurred', color: '#91cf60', sort: 0},
-  {key: '3rd Reading Concurred', color: '#91cf60', sort: 0},
-  {key: '3rd Reading Pass Consideration', color: '#91cf60', sort: 0},
-  {key: '3rd Reading Passed as Amended by Senate', color: '#91cf60', sort: 0},
-  {key: 'Signed by Governor', color: '#91cf60', sort: 0},
-  {key: 'Signed by President', color: '#91cf60', sort: 0},
-  {key: 'Chapter Number Assigned', color: '#91cf60', sort: 0},
-  {key: 'Taken from Committee; Placed on 2nd Reading', color: '#91cf60', sort: 0},
+  {key: '2nd Reading Passed', color: '#91cf60', glyph: '✓2nd', sort: 0},
+  {key: '2nd Reading Passed as Amended', color: '#91cf60', glyph: 'Δ2nd', sort: 0},
+  {key: '3rd Reading Passed', color: '#91cf60', glyph: '✓3rd', sort: 0},
+  {key: '2nd Reading Concurred', color: '#91cf60', glyph: '✓2nd', sort: 0},
+  {key: '2nd Reading Concurred as Amended', color: '#91cf60', glyph: 'Δ2nd', sort: 0},
+  {key: '2nd Reading Senate Amendments Concurred', color: '#91cf60', glyph: 'Δ2nd', sort: 0},
+  {key: '3rd Reading Concurred', color: '#91cf60', glyph: '✓3rd', sort: 0},
+  {key: '3rd Reading Pass Consideration', color: '#91cf60', glyph: '[]', sort: 0},
+  {key: '3rd Reading Passed as Amended by Senate', color: '#91cf60', glyph: 'Δ3rd', sort: 0},
+  {key: 'Signed by Governor', color: '#91cf60',  glyph: '✓Gov', sort: 0},
+  // {key: 'Signed by President', color: '#91cf60',  glyph: '✓', sort: 0},
+  {key: 'Chapter Number Assigned', color: '#91cf60',  glyph: 'LAW', sort: 0},
+ 
   
   
   // death
-  {key: '2nd Reading Indefinitely Postponed', color: '#fc8d59', sort: 0},
-  {key: '2nd Reading Not Passed', color: '#fc8d59', sort: 0},
-  {key: '2nd Reading Not Concurred', color: '#fc8d59', sort: 0},
-  {key: '2nd Reading Pass Motion Failed', color: '#fc8d59', sort: 0},
-  {key: '2nd Reading Pass as Amended Motion Failed', color: '#fc8d59', sort: 0},
-  {key: '3rd Reading Failed', color: '#fc8d59', sort: 0},
-  {key: 'Adverse Committee Report Adopted', color: '#fc8d59', sort: 0},
-  {key: 'Committee Vote Failed; Remains in Committee', color: '#fc8d59', sort: 0},
+  {key: '2nd Reading Indefinitely Postponed', color: '#fc8d59',  glyph: 'X', sort: 0},
+  {key: '2nd Reading Not Passed', color: '#fc8d59',   glyph: '✗2nd', sort: 0},
+  {key: '2nd Reading Not Concurred', color: '#fc8d59',   glyph: '✗2nd', sort: 0},
+  {key: '2nd Reading Pass Motion Failed', color: '#fc8d59',   glyph: '✗2nd', sort: 0},
+  {key: '2nd Reading Pass as Amended Motion Failed', color: '#fc8d59', glyph: '✗2nd', sort: 0},
+  {key: '3rd Reading Failed', color: '#fc8d59', glyph: '✗3rd', sort: 0},
+  {key: 'Adverse Committee Report Adopted', color: '#fc8d59',  glyph: '✗Cmt', sort: 0},
+  {key: 'Committee Vote Failed; Remains in Committee', color: '#fc8d59', glyph: '[]', sort: 0},
+
+  // ambiguous
+  {key: 'Taken from Committee; Placed on 2nd Reading', color: '#91cf60',  glyph: '[]', sort: 0},
   
 ]
 
@@ -118,6 +122,7 @@ export const UNIMPORTANT_ACTIONS = [
     "Scheduled for Executive Action",
     "Sent to Enrolling",
     "Signed by Speaker",
+    "Signed by President",
     "Sponsor List Modified",
     "Sponsor Rebuttal to Fiscal Note Printed",
     "Sponsor Rebuttal to Fiscal Note Received",
@@ -131,11 +136,6 @@ export const UNIMPORTANT_ACTIONS = [
     "2nd Reading Pass Consideration",
     "2nd Reading Passed Consideration",
     // redundant
-    "Committee Report--Bill Passed",
-    "Committee Report--Bill Concurred",
-    "Committee Report--Bill Passed as Amended",
     "Clerical Corrections Made - New Version Available",
-    "Committee Report--Bill Concurred as Amended",
-    "Committee Report--Bill Not Passed"
-    
+    "Committee Report--Bill Not Passed",
   ]

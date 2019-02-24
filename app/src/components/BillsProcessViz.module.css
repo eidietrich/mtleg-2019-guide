@@ -1,0 +1,69 @@
+.billProcessViz {
+    /* border: 1px solid #eee; */
+    margin-top: 1rem;
+}
+
+.header {
+    /* background-color: #666; */
+    /* font-weight: bold; */
+    margin-bottom: 0.5rem;
+    font-style: italic;
+    /* color: white; */
+}
+
+.rowsContainer {
+    /* color: green; */
+}
+
+.row {
+    /* background-color: #eee; */
+    border-top: 1px solid #eee;
+    /* margin-bottom: 0.2rem; */
+    min-height: 1.2rem;
+    
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    flex-wrap: wrap;
+    
+}
+
+.idCol {
+    /* font-style: italic; */
+    font-size: 0.9rem;
+    /* text-align: right; */
+    /* margin-right: 5px; */
+    padding: 2px;
+    flex: 0 0 auto;
+}
+.titleCol {
+    font-style: italic;
+    font-size: 0.9rem;
+    padding: 2px;
+}
+.actionsCol {
+    flex: 1 0 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 0.2rem;
+}
+
+.action {
+    margin-left: 0.1rem;
+    margin-bottom: 0.4rem;
+    height: 0.8rem;
+    flex: 0 0 0.8rem;
+    padding: 0 0.2rem;
+
+    border: 1px solid #222;
+
+    /*glyph*/
+    /* text-align: center; */
+    font-size: 0.8rem;
+    color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

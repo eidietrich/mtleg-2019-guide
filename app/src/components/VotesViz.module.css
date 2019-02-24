@@ -1,0 +1,24 @@
+
+.voteRow {
+    display: flex;
+}
+
+.billCol {
+    flex: 0 1 5rem;
+    font-weight: bold;
+}
+
+.resultCol {
+    flex: 0 1 5rem;
+}
+
+.voteCol {
+    flex: 0 1 5rem;
+}
+.dateCol {
+    flex: 0 1 10rem;
+}
+
+.motionCol {
+    flex: 0 1 20rem;
+}

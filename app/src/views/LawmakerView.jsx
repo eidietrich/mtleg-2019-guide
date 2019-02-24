@@ -1,14 +1,22 @@
 import React, { Component } from 'react'
 
-// import { getLastBillAction } from './../js/handling'
+import BillsProcessViz from './../components/BillsProcessViz'
+
+import { getBillsForLawmaker } from './../js/handling'
+
 
 class LawmakerView extends Component {
     render() {
+        const lawmaker = this.props.lawmaker
+        const bills = getBillsForLawmaker(lawmaker)
         return (<div>
-            <div>This is a view for particular Lawmaker</div>
-            <div>Name, district, committee assignments, etc.</div>
+            <div>This is a view for {lawmaker.name}</div>
+            <div>TK district, committee assignments, etc.</div>
+            <br/>
             <div>TK: Key votes</div>
-            <div>TK: Bills sponsored (and progress) --> Bills table</div>
+            <br/>
+            <div>Bills sponsored ({bills.length})</div>
+            <BillsProcessViz bills={bills} />
         </div>);
     }
   }

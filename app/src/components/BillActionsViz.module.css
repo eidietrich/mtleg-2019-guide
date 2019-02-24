@@ -1,0 +1,80 @@
+.title {
+    background-color: #666;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+}
+
+.description {
+    padding: 0.5rem;
+}
+
+.header {
+    display: flex;
+    font-weight: bold;
+}
+
+.rowsContainer {
+    /* color: green; */
+}
+
+.row {
+    /* background-color: #eee; */
+    border-top: 1px solid #eee;
+    margin-bottom: 0.2rem;
+    /* height: 1.2rem; */
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    
+}
+
+.actionCol{
+    flex: 0 0 3rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.descriptionCol {
+    flex: 0 0 15rem;
+}
+.dateCol {
+    flex: 0 0 6rem;
+}
+.bodyCol {
+    flex: 0 0 10rem;
+}
+
+.rowsContainer .dateCol {
+    font-style: italic;
+    color: #666;
+}
+
+.rowId {
+    font-style: italic;
+    font-size: 0.8em;
+    /* text-align: right; */
+    /* margin-right: 5px; */
+    padding: 2px;
+    flex: 0 0 4rem;
+}
+
+.action {
+    margin-left: 0.2rem;
+    height: 0.8rem;
+    flex: 0 0 0.8rem;
+    padding: 0 0.1rem;
+
+    border: 1px solid #222;
+
+    /*glyph*/
+    /* text-align: center; */
+    font-size: 0.1em;
+    color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

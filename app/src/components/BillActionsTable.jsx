@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ReactTable from "react-table";
+// import ReactTable from "react-table";
 import 'react-table/react-table.css'
 
 // import { getLastBillAction } from './../js/handling'
@@ -9,13 +9,14 @@ class BillActionsTable extends Component {
         const bill = this.props.bill
         const actions = bill.actions
         const columns = []
+        console.log(bill)
     
         return (<div>
             <div>Showing X bill table. It has {actions.length} actions.</div>
-            <ReactTable
+            {/* <ReactTable
                 data={actions}
                 columns={columns}
-            />
+            /> */}
         </div>);
     }
   }
