@@ -2,14 +2,17 @@ import React, { Component } from 'react'
 
 import VotesViz from '../components/VotesViz'
 
-import { getFloorVotes, getAllVotes, getMajorFloorVotes } from './../js/handling'
+import { getSecondReadingVotes, sortVoteByMargin } from './../js/handling'
 
 class AllVotesView extends Component {
     render() {
-        const votes = getMajorFloorVotes() // excludes committee votes; votes to table aren't tabulated in LAWS
+        const votes = getSecondReadingVotes()
+            .sort(sortVoteByMargin)
         return (<div>
-            <div>All Votes View</div>
+            <div>Showing second reading floor votes</div>
+            <div>TODO: Separate by chamber</div>
             <div>TK: Filtering options</div>
+            <div>TK: Sorting options: By bill number, by vote date, by margin (default)</div>
             <br/>
             <VotesViz votes={votes} />
             

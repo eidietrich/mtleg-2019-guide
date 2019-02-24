@@ -15,6 +15,8 @@ class SingleBillView extends Component {
             <div>TK Link to LAWS</div>
             <div>TK Bill status</div>
             <BillActionsViz bill={bill} />
+            <br/>
+            <div>TK 2nd reading votes</div>
         </div>);
     }
   }

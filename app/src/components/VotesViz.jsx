@@ -5,10 +5,13 @@
 */
 
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import styles from './VotesViz.module.css'
 
-import { getVoteAyes, getVoteNays, getVoteBill } from './../js/handling'
+import { getBillURLId, 
+    getVoteAyes, getVoteNays, getVoteBill, votePassed,
+    getLawmakerVote, gopLeadershipVote, demLeadershipVote, gopCaucusVote, demCaucusVote } from './../js/handling'
 
 class VotesViz extends Component {
     render() {    
@@ -16,7 +19,14 @@ class VotesViz extends Component {
         console.log(votes)
         const rows = votes.map((vote, i) => Vote(vote, i))
         return (<div>
-            <div>This will list out several votes, compare who voted how on them</div>
+            <div className={styles.tableHeader}>
+                <div className={styles.billCol}>Bill</div>
+                <div className={styles.billTitleCol}>Title</div>
+                <div className={styles.outcomeCol}>2nd Reading (Yes-No)</div>
+                <div className={styles.compareVoteCol}>GOP caucus</div>
+                <div className={styles.compareVoteCol}>Dem caucus</div>
+                <div className={styles.dateCol}>Vote date</div>
+            </div>
             <div className={styles.rowContainer}>
                 {rows}
             </div>
@@ -26,12 +36,40 @@ class VotesViz extends Component {
 
 const Vote = (vote, i) => {
     // console.log(vote)
+    const color = (d) => {
+        if (d === 'yes') return '#91cf60'
+        if (d === 'no') return '#fc8d59'
+        else return '#ddd'
+    }
+    const glyph = (vote) => votePassed(vote) ? '✓': '✗'
+    const passGlyph = (pass) => (pass === 'yes') ? '✓': '✗'
+
     const bill = getVoteBill(vote)
+    const gopVote = gopCaucusVote(vote)
+    const demVote = demCaucusVote(vote)
+    // console.log(gopVote, demVote)
     return <div key={String(i)}>
         <div className={styles.voteRow}>
-            <div className={styles.billCol}>{bill.identifier}</div>
-            <div className={styles.voteCol}>{` ${getVoteAyes(vote)}-${getVoteNays(vote)}`}</div>
-            <div className={styles.motionCol}>{vote.bill_action} </div>
+            <div className={styles.billCol}>
+                <Link to={`/bill/${getBillURLId(bill)}`}>{bill.identifier}</Link>
+            </div>
+            
+            <div className={styles.billTitleCol}>{bill.title}</div>
+            <div className={styles.outcomeCol}
+                style={{backgroundColor: votePassed(vote) ? '#91cf60' : '#fc8d59'}}>
+                {`${glyph(vote)}${getVoteAyes(vote)}-${getVoteNays(vote)}`}
+            </div>
+            <div className={styles.compareVoteCol}
+                style={{backgroundColor: color(gopVote.caucus)}}>
+                {/* {gopVote.caucus} */}
+                {`${gopVote.yes}-${gopVote.no}`}
+            </div>
+            <div className={styles.compareVoteCol}
+                style={{backgroundColor: color(demVote.caucus)}}>
+                {/* {gopVote.caucus} */}
+                {`${demVote.yes}-${demVote.no}`}
+            </div>
+            {/* <div className={styles.motionCol}>{} </div> */}
             <div className={styles.dateCol}>{vote.start_date} </div>
         </div>
     </div>

@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && mv ./build ./bill-app-test",
+    "build": "rm -r ./bill-app-test && react-scripts build && mv ./build ./bill-app-test",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -110,6 +110,12 @@ export const getLawmakerByURLName = (urlName) => {
     const lawmaker = lawmakers.find(d => getLawmakerUrlName(d) === urlName)
     return lawmaker
 }
+export const lawmakerTitle = (lawmaker) => {
+    if (lawmaker.chamber === 'house') return 'Rep.'
+    if (lawmaker.chamber === 'senate') return 'Sen.'
+}
+export const gopCaucus = () => lawmakers.filter(d => d.party === 'R')
+export const demCaucus = () => lawmakers.filter(d => d.party === 'D')
 
 // VOTES HANDLING
 
@@ -126,6 +132,12 @@ export const getMajorFloorVotes = () => {
     const exclude = ['3rd Reading Passed','3rd Reading Concurred']
     return getFloorVotes().filter(vote => !exclude.includes(vote.bill_action))
 }
+
+export const getSecondReadingVotes = () => {
+    const include = ['2nd Reading Passed','2nd Reading Concurred', '2nd Reading Not Passed',
+    '2nd Reading Not Concurred', '2nd Reading Passed as Amended', ]
+    return getFloorVotes().filter(vote => include.includes(vote.bill_action))
+}
     
 export const sortVoteByBillAndDate = (a,b) => {
     const aBill = getVoteBill(a)
@@ -133,14 +145,21 @@ export const sortVoteByBillAndDate = (a,b) => {
     if (aBill.identifier === bBill.identifier) return new Date(a.start_date) - new Date(b.start_date)
     else return sortByBillNumber(aBill, bBill)
 }
+export const sortVoteByMargin = (a,b) => {
+    const aMargin = getVoteAyes(a) - getVoteNays(a)
+    const bMargin = getVoteAyes(b) - getVoteNays(b)
+    return aMargin - bMargin
+}
 
 export const getVoteAyes = (vote) => vote.counts.find(d => d.option === 'yes').value
 export const getVoteNays = (vote) => vote.counts.find(d => d.option === 'no').value
 export const getVoteBill = (vote) => getBillByScrapeId(vote.bill)
 export const getVoteAbsentExcused = (vote) => vote.counts.find(d => ['excused','absent'].includes(d.option)).value
+export const votePassed = (vote) => (getVoteAyes(vote) > getVoteNays(vote))
 
-export const getMajorFloorVotesForLawmaker = (lawmaker) => {
-    return getMajorFloorVotes()
+
+export const getSecondReadingVotesForLawmaker = (lawmaker) => {
+    return getSecondReadingVotes()
         .filter(d => d.votes.filter(e => e.voter_name === lawmaker.laws_vote_name).length > 0)
 }
 
@@ -167,6 +186,33 @@ export const voteWithDemLeader = (vote, lawmaker) => {
     if (lawmakerVote === 'excused' || lawmakerVote === 'absent') return 'yes'
     if (demLeadershipVote === 'excused' || lawmakerVote === 'absent') return 'n/a'
     return (lawmakerVote === demLeadershipVote) ? 'yes' : 'no'
+}
+
+export const gopCaucusVote = (vote) => {
+    const gopNames = gopCaucus().map(d => d.laws_vote_name)
+    const caucusVotes = vote.votes.filter(v => gopNames.includes(v.voter_name))
+    const ayes = caucusVotes.filter(v => v.option === 'yes').length
+    const nays = caucusVotes.filter(v => v.option === 'no').length
+    const absent = caucusVotes.filter(v => ['absent','excused'].includes(v.option)).length
+    return {
+        yes: ayes,
+        no: nays,
+        absent: absent,
+        caucus: (ayes > nays) ? 'yes' : 'no',
+    }
+}
+export const demCaucusVote = (vote) => {
+    const demNames = demCaucus().map(d => d.laws_vote_name)
+    const caucusVotes = vote.votes.filter(v => demNames.includes(v.voter_name))
+    const ayes = caucusVotes.filter(v => v.option === 'yes').length
+    const nays = caucusVotes.filter(v => v.option === 'no').length
+    const absent = caucusVotes.filter(v => ['absent','excused'].includes(v.option)).length
+    return {
+        yes: ayes,
+        no: nays,
+        absent: absent,
+        caucus: (ayes > nays) ? 'yes' : 'no',
+    }
 }
 
 // export const getLawmakerVote = (vote, name) => {
