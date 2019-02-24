@@ -1,0 +1,61 @@
+
+.tableHeader {
+    display: flex;
+}
+
+.voteRow {
+    display: flex;
+    /* margin-bottom: 0.4rem; */
+    border-top: 1px solid #eee;
+    padding: 0.2rem;
+
+    /* flex-wrap: wrap; */
+}
+
+.billCol {
+    flex: 0 0 5rem;
+    /* padding: 0.2rem; */
+}
+.billTitleCol {
+    flex: 0 0 15rem;
+    /* padding: 0.2rem; */
+}
+.outcomeCol {
+    flex: 0 0 10rem;
+    /* padding: 0.2rem; */
+}
+
+.rowContainer .billCol {
+    font-weight: bold;
+    
+
+}
+
+.rowContainer .billTitleCol {
+    font-style: italic;
+    font-size: 0.8em;
+}
+.lawmakerVoteCol {
+    flex: 0 0 5rem;
+    /* padding: 0.2rem; */
+    /* font-weight: bold; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.2rem;
+}
+
+/* .resultCol {
+    flex: 0 0 5rem;
+}
+
+.voteCol {
+    flex: 0 0 5rem;
+}
+.dateCol {
+    flex: 0 0 10rem;
+}
+
+.motionCol {
+    flex: 0 0 20rem;
+} */

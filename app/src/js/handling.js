@@ -11,7 +11,10 @@ TODO: Go through here and make sure terminology is constand
 
 */
 
-import data from './../data/scrape-2019-02-21.json'
+// import data from './../data/scrape-2019-02-23.json'
+import bills from './../data/scrape-2019-02-23-bills.json'
+import votes from './../data/scrape-2019-02-23-votes.json'
+import lawmakers from './../data/leg-roster.json'
 import { IMPORTANT_ACTIONS, UNIMPORTANT_ACTIONS } from './config'
 
 export const getCommittees = (bill) => {
@@ -20,11 +23,11 @@ export const getCommittees = (bill) => {
 
 export const getSponsor = bill => bill.sponsorships.find(d => d.classification === 'primary').name
 
-export const getVotes = billId => data.votes.filter(d => d.bill === billId)
+export const getVotes = billId => votes.filter(d => d.bill === billId)
     .sort((a,b) => new Date(a.start_date) - new Date(b.start_date))
 
-export const getBillById = id => data.bills.find(d => d.identifier === id)
-export const getBillByScrapeId = id => data.bills.find(d => d._id === id)
+export const getBillById = id => bills.find(d => d.identifier === id)
+export const getBillByScrapeId = id => bills.find(d => d._id === id)
 
 export const getBillByURLId = urlid => {
     // urlID is condensed, e.g. 'hb3','sb94'
@@ -37,20 +40,20 @@ export const getBillURLId = bill => bill.identifier.substring(0,2) + bill.identi
 
 // BILL HANDLING
 
-export const getBillsSample = () => data.bills.slice(50,150)
+export const getBillsSample = () => bills.slice(50,150)
 
-export const getAllBills = () => data.bills
+export const getAllBills = () => bills
 
 export const getBillsForCommittee = committee => {
-    return data.bills.filter(bill => getCommittees(bill).includes(committee))
+    return bills.filter(bill => getCommittees(bill).includes(committee))
 }
 
 export const getBillsWithAction = action => {
-    return data.bills.filter(bill => bill.actions.map(d => d.description).includes(action))
+    return bills.filter(bill => bill.actions.map(d => d.description).includes(action))
 }
 
 export const getBillsForLawmaker = lawmaker => {
-    return data.bills.filter(bill => getSponsor(bill) === lawmaker.name)
+    return bills.filter(bill => getSponsor(bill) === lawmaker.name)
 }
 
 export const sortByBillNumber = (a,b) => {
@@ -97,27 +100,33 @@ export const getAllLawmakers = () => {
     // TODO: hook up more sophisticated date to this,
     // set this up so it runs once at initializatio (or do preprocessing)
     // Currently just names
-    const names = [...new Set(data.bills.map(bill => getSponsor(bill)).flat())]
-    return names.map(name => ({name: name}))
+    // const names = [...new Set(bills.map(bill => getSponsor(bill)).flat())]
+    // return names.map(name => ({name: name}))
+    return lawmakers
 } 
 export const getLawmakerUrlName = (lawmaker) => lawmaker.name.replace(/\s/g, '')
 export const getLawmakerByURLName = (urlName) => {
-    const lawmakers = getAllLawmakers()
+    // const lawmakers = getAllLawmakers()
     const lawmaker = lawmakers.find(d => getLawmakerUrlName(d) === urlName)
     return lawmaker
 }
 
 // VOTES HANDLING
 
-export const getAllVotes = () => data.votes.sort(sortVoteByBillAndDate)
+export const getAllVotes = () => votes.sort(sortVoteByBillAndDate)
 export const getFloorVotes = () => {
     // by inspection, it looks like "bill_action" field is null for committee votes
     // note that votes to table aren't recorded in LAWS at all 
-    return data.votes.filter(vote => vote.bill_action !== null)
+    return votes.filter(vote => vote.bill_action !== null)
         .sort(sortVoteByBillAndDate)
 }
-    
 
+export const getMajorFloorVotes = () => {
+    // exclude procedural things
+    const exclude = ['3rd Reading Passed','3rd Reading Concurred']
+    return getFloorVotes().filter(vote => !exclude.includes(vote.bill_action))
+}
+    
 export const sortVoteByBillAndDate = (a,b) => {
     const aBill = getVoteBill(a)
     const bBill = getVoteBill(b)
@@ -129,3 +138,37 @@ export const getVoteAyes = (vote) => vote.counts.find(d => d.option === 'yes').v
 export const getVoteNays = (vote) => vote.counts.find(d => d.option === 'no').value
 export const getVoteBill = (vote) => getBillByScrapeId(vote.bill)
 export const getVoteAbsentExcused = (vote) => vote.counts.find(d => ['excused','absent'].includes(d.option)).value
+
+export const getMajorFloorVotesForLawmaker = (lawmaker) => {
+    return getMajorFloorVotes()
+        .filter(d => d.votes.filter(e => e.voter_name === lawmaker.laws_vote_name).length > 0)
+}
+
+export const getLawmakerVote = (vote, lawmaker) => {
+    return vote.votes.find(d => d.voter_name === lawmaker.laws_vote_name).option
+}
+
+const gopLeaders =  ["Tschida, Brad", "Thomas, Fred"]
+export const gopLeadershipVote = (vote) => vote.votes.find(d => gopLeaders.includes(d.voter_name)).option
+export const voteWithGOPLeader = (vote, lawmaker) => {
+    // only works for floor votes
+    const lawmakerVote = getLawmakerVote(vote, lawmaker)
+    const gop = gopLeadershipVote(vote)
+    if (lawmakerVote === 'excused' || lawmakerVote === 'absent') return 'yes'
+    if (gop === 'excused' || lawmakerVote === 'absent') return 'n/a'
+    return (lawmakerVote === gop) ? 'yes' : 'no'
+}
+const demLeaders = ["Schreiner, Casey", "Sesso, Jon"]
+export const demLeadershipVote = (vote) => vote.votes.find(d => demLeaders.includes(d.voter_name)).option
+export const voteWithDemLeader = (vote, lawmaker) => {
+    // only works for floor votes
+    const lawmakerVote = getLawmakerVote(vote, lawmaker)
+    const demLeadershipVote = demLeadershipVote(vote)
+    if (lawmakerVote === 'excused' || lawmakerVote === 'absent') return 'yes'
+    if (demLeadershipVote === 'excused' || lawmakerVote === 'absent') return 'n/a'
+    return (lawmakerVote === demLeadershipVote) ? 'yes' : 'no'
+}
+
+// export const getLawmakerVote = (vote, name) => {
+//     const laws_vote_name = lawmakers.find(d => d.name === name).laws_vote_name
+// }

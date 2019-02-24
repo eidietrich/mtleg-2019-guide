@@ -3,7 +3,9 @@
 import json
 import glob
 
-out_path = 'data-processed/scrape-2019-MM-DD.json'
+out_path_1 = 'data-processed/scrape-2019-02-23.json'
+out_path_app_votes = 'app/src/data/scrape-2019-02-23-votes.json'
+out_path_app_bills = 'app/src/data/scrape-2019-02-23-bills.json'
 
 # Utility functions
 def get_js(path):
@@ -22,7 +24,9 @@ def main():
     bills = [get_js(file) for file in bill_files]
     votes = [get_js(file) for file in vote_files]
     
-    write_js(out_path, {'bills': bills, 'votes': votes})
+    write_js(out_path_1, {'bills': bills, 'votes': votes})
+    write_js(out_path_app_bills, bills)
+    write_js(out_path_app_votes, votes)
     
 if __name__ == "__main__":
     main()

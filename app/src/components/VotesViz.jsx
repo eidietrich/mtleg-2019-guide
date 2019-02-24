@@ -25,13 +25,12 @@ class VotesViz extends Component {
   }
 
 const Vote = (vote, i) => {
-    console.log(vote)
+    // console.log(vote)
     const bill = getVoteBill(vote)
     return <div key={String(i)}>
         <div className={styles.voteRow}>
             <div className={styles.billCol}>{bill.identifier}</div>
             <div className={styles.voteCol}>{` ${getVoteAyes(vote)}-${getVoteNays(vote)}`}</div>
-            <div className={styles.resultCol}>({vote.result})</div>
             <div className={styles.motionCol}>{vote.bill_action} </div>
             <div className={styles.dateCol}>{vote.start_date} </div>
         </div>

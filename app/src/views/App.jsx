@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import './App.css';
+// import './App.css';
+import styles from './App.module.css'
 // import BillsTable from '../components/BillsTable'
 import BillsProcessViz from '../components/BillsProcessViz'
 
@@ -27,7 +28,7 @@ const votes = []
 class App extends Component {
   render() {
     return (<Router>
-      <div>
+      <div className={styles.app}>
         <div>Views</div>
         <ul>
           <li><Link to="/">Home</Link></li>
@@ -52,12 +53,14 @@ class App extends Component {
   }
 }
 
-const Home = () => (
-  <div>
-    <h2>This is the home page</h2>
-    <div>TK summary stuff</div>
-  </div>
-);
+const Home = () => {
+  return(
+    <div>
+      <h2>This is the home page</h2>
+      <div>TK summary stuff</div>
+    </div>
+  )
+}
 
 const BillByUrl = ({ match }) => {
   return <SingleBillView bill={getBillByURLId(match.params.id)} />
