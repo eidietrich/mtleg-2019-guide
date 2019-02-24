@@ -91,6 +91,10 @@ class MTBillScraper(Scraper, LXMLMixin):
             if 'upper' in chambers and 'SB' in bill_url:
                 bill_urls.append(bill_url)
 
+        # # FOR TESTING ON SINGLE BILL
+        # test_bill_url = 'http://laws.leg.mt.gov/legprd/LAW0210W$BSIV.ActionQuery?P_BILL_NO1=139&P_BLTP_BILL_TYP_CD=HB&Z_ACTION=Find&P_SESS=20191'
+        # bill_urls = [test_bill_url]
+
         for bill_url in bill_urls:
             bill, votes = self.parse_bill(bill_url, session)
             yield bill
@@ -346,14 +350,13 @@ class MTBillScraper(Scraper, LXMLMixin):
         base_url += '/'
         status_page.make_links_absolute(base_url)
 
-        for tr in status_page.xpath('//table')[3].xpath('tr')[2:]:
+        for tr in status_page.xpath('//table')[3].xpath('tr')[1:]:
             tds = list(tr)
 
             if tds:
                 vote_url = tds[2].xpath('a/@href')
 
                 if vote_url:
-
                     # Get the matching vote object.
                     text = tr.itertext()
                     action = next(text).strip()
