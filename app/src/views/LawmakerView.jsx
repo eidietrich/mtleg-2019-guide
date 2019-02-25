@@ -15,8 +15,6 @@ class LawmakerView extends Component {
             .sort(sortVoteByMargin)
         const bills = getBillsForLawmaker(lawmaker)
 
-        console.log(votes)
-        
         return (<div>
             <div className={styles.header}>
                 {`${lawmakerTitle(lawmaker)} ${lawmaker.name}, ${lawmaker.party}-${lawmaker.city}`}
@@ -27,7 +25,8 @@ class LawmakerView extends Component {
             <div>TK summary stats: Passed into law, dead, tabled, in process</div>
             <BillsProcessViz bills={bills} />
             <br />
-            <div className={styles.subHead}>Floor votes ({votes.length})</div>
+            <div className={styles.subHead}>Floor votes</div>
+            <div>Showing 2nd reading</div>
             <div>TK summary stats: % with majority, % with party</div>
             <div>TK Filtering options (All, with party, against party, tight votes, newsworthy votes)</div>
             <LawmakerVotesViz lawmaker={lawmaker} votes={votes} />

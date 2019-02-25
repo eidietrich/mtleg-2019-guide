@@ -18,7 +18,6 @@ class BillsProcessViz extends Component {
             .map(bill => Row(bill))
     
         return (<div className={styles.billProcessViz}>
-            {/* <div className={styles.header}></div> */}
             <div className={styles.rowsContainer}>
                 {rows}
             </div>
@@ -32,7 +31,7 @@ const Row = (bill) => {
     
     return (<div key={bill.identifier} className={styles.row}>
         <div className={styles.statusCol}>
-            {BillStatus(bill)}
+            <BillStatus bill={bill} />
         </div>
         <div className={styles.idCol}>
            <Link to={`/bill/${getBillURLId(bill)}`}>{bill.identifier}</Link>

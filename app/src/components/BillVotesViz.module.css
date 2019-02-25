@@ -1,8 +1,6 @@
 .table {
     overflow: scroll;
 }
-
-
 .tableHeader {
     display: flex;
     font-size: 0.8em;
@@ -19,28 +17,39 @@
     /* flex-wrap: wrap; */
 }
 
-.billCol {
-    flex: 0 0 4rem;
-    /* padding: 0.2rem; */
+.locationCol {
+    flex: 0 0 3rem;
+    margin-right: 0.2rem;
 }
-.billTitleCol {
-    flex: 1 0 15rem;
-    /* padding: 0.2rem; */
+.descriptionCol {
+    flex: 3 0 5rem;
+    margin-right: 0.2rem;
 }
 .outcomeCol {
-    flex: 0 0 5rem;
+    flex: 0.5 0 4rem;
     margin-right: 0.2rem;
     /* padding: 0.2rem; */
 }
-.dateCol {
-    flex: 0 0 5rem;
+.compareVoteCol {
+    flex: 0.5 0 3rem;
+    margin-right: 0.2rem;
 }
+.dateCol {
+    flex: 1 0 3rem;
+    margin-right: 0.2rem;
+}
+
+.rowContainer .locationCol,
+.rowContainer .descriptionCol,
+.rowContainer .outcomeCol,
+.rowContainer .compareVoteCol,
+.rowContainer .dateCol {
+    display: flex;
+}
+
 .rowContainer .dateCol {
     font-size: 0.8em;
     color: #444;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .rowContainer .billCol {
@@ -48,7 +57,7 @@
 }
 .rowContainer .outcomeCol {
     font-weight: bold;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     justify-content: center;
     font-size: 0.8em;
@@ -58,14 +67,14 @@
     font-size: 0.8em;
 }
 
-.lawmakerVoteCol, .compareVoteCol {
-    flex: 0 0 5rem;
+.compareVoteCol {
+    /* flex: 0 0 5rem; */
     /* padding: 0.2rem; */
     /* font-weight: bold; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0.2rem;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* margin-right: 0.2rem; */
 }
 
 .rowContainer .lawmakerVoteCol,

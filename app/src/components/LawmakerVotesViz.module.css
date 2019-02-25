@@ -1,9 +1,16 @@
-
+.table {
+    overflow: scroll;
+}
 .tableHeader {
     display: flex;
+    
     font-size: 0.8em;
     align-items: flex-end;
     padding: 0.2rem;
+}
+.tableHeader .lawmakerVoteCol {
+    font-weight: bold;
+    /* text-transform: uppercase; */
 }
 
 .voteRow {
@@ -16,21 +23,37 @@
 }
 
 .billCol {
-    flex: 0 0 5rem;
-    /* padding: 0.2rem; */
+    flex: 0.5 0 2rem;
+    margin-right: 0.2rem;
 }
 .billTitleCol {
-    flex: 1 0 15rem;
-    /* padding: 0.2rem; */
+    flex: 4 0 6rem;
+    margin-right: 0.2rem;
 }
 .outcomeCol {
-    flex: 0 0 5rem;
+    flex: 0.5 0 3.5rem;
     margin-right: 0.2rem;
-    /* padding: 0.2rem; */
+    
+}
+.lawmakerVoteCol{
+    flex: 0.3 0 3rem;
+    margin-right: 0.2rem;
+}
+.compareVoteCol {
+    flex: 0 0 3rem;
+    margin-right: 0.2rem;
 }
 
 .rowContainer .billCol {
     font-weight: bold;
+}
+.rowContainer .billCol a {
+    color: #222;
+    text-decoration: none;
+}
+.rowContainer .billCol a:hover {
+    color: blue;
+    /* text-decoration: underline; */
 }
 .rowContainer .outcomeCol {
     font-weight: bold;
@@ -39,53 +62,30 @@
     justify-content: center;
     font-size: 0.8em;
     opacity: 0.8;
+    max-height: 2rem;
+    
 }
 .rowContainer .billTitleCol {
     font-style: italic;
     font-size: 0.8em;
 }
 
-.lawmakerVoteCol, .compareVoteCol {
-    flex: 0 0 5rem;
-    /* padding: 0.2rem; */
-    /* font-weight: bold; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0.2rem;
-}
+
 
 .rowContainer .lawmakerVoteCol,
 .rowContainer .compareVoteCol {
     /* font-style: italic; */
     font-size: 0.8em;
     text-transform: capitalize;
+    max-height: 2rem;
+    border: 1px solid #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.tableHeader .lawmakerVoteCol {
-    font-weight: bold;
-    text-transform: uppercase;
-}
+
 .rowContainer .lawmakerVoteCol {
+    border: 1px solid #222;
     font-weight: bold;
 }
-
-
-.rowContainer .compareVoteCol {
-    opacity: 0.8;
-    
-}
-
-/* .resultCol {
-    flex: 0 0 5rem;
-}
-
-.voteCol {
-    flex: 0 0 5rem;
-}
-.dateCol {
-    flex: 0 0 10rem;
-}
-
-.motionCol {
-    flex: 0 0 20rem;
-} */

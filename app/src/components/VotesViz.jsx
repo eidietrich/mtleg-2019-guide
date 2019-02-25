@@ -17,7 +17,7 @@ class VotesViz extends Component {
     render() {    
         const votes = this.props.votes
         const rows = votes.map((vote, i) => Vote(vote, i))
-        return (<div>
+        return (<div className={styles.table}>
             <div className={styles.tableHeader}>
                 <div className={styles.billCol}>Bill</div>
                 <div className={styles.billTitleCol}>Title</div>

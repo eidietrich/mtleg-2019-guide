@@ -3,4 +3,9 @@
     max-width: 826px;
     margin: auto;
     padding-top: 0.5rem;
-  }
+}
+
+hr {
+  border-top: 1px solid #666;
+  border-bottom: none;
+}

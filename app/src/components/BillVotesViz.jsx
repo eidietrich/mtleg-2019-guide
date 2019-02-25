@@ -5,28 +5,29 @@
 */
 
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 
-import styles from './LawmakerVotesViz.module.css'
+import styles from './BillVotesViz.module.css'
 
-import { getBillURLId, 
+import { getBillURLId, getBillVotes, sortVoteByBillAndDate,
     voteCountText, getVoteBill, votePassed,
     getLawmakerVote, gopLeadershipVote, demLeadershipVote, gopCaucusVote, demCaucusVote } from './../js/handling'
 
-class LawmakerVotesViz extends Component {
+class BillVotesViz extends Component {
     render() {    
-        const votes = this.props.votes
-        const lawmaker = this.props.lawmaker
-        const rows = votes.map((vote, i) => Vote(vote, i, lawmaker))
+        // const votes = this.props.votes
+        const bill = this.props.bill
+        const votes = getBillVotes(bill)
+            .sort(sortVoteByBillAndDate)
+        const rows = votes.map((vote, i) => Vote(vote, i))
         return (<div className={styles.table}>
             <div className={styles.tableHeader}>
-                <div className={styles.firstColGroup}></div>
-                <div className={styles.billCol}>Bill</div>
-                <div className={styles.billTitleCol}>Title</div>
-                <div className={styles.outcomeCol}>Outcome (Yes&#8209;No)</div>
-                <div className={styles.lawmakerVoteCol}>{lawmaker.name}</div>
+                <div className={styles.locationCol}>Location</div>
+                <div className={styles.dateCol}>Date</div>
+                <div className={styles.descriptionCol}>Action</div>
+                <div className={styles.outcomeCol}>Vote</div>
                 <div className={styles.compareVoteCol}>GOP caucus</div>
                 <div className={styles.compareVoteCol}>Dem caucus</div>
+                
             </div>
             <div className={styles.rowContainer}>
                 {rows}
@@ -35,7 +36,7 @@ class LawmakerVotesViz extends Component {
     }
   }
 
-const Vote = (vote, i, lawmaker) => {
+const Vote = (vote, i) => {
     // console.log(vote)
     const color = (d) => {
         if (d === 'yes') return '#91cf60'
@@ -46,24 +47,19 @@ const Vote = (vote, i, lawmaker) => {
     const passGlyph = (pass) => (pass === 'yes') ? '✓': '✗'
 
     const bill = getVoteBill(vote)
-    const lawmakerVote = getLawmakerVote(vote, lawmaker)
     const gopVote = gopCaucusVote(vote)
     const demVote = demCaucusVote(vote)
-    // console.log(gopVote, demVote)
+    console.log(vote)
     return <div key={String(i)}>
         <div className={styles.voteRow}>
-            <div className={styles.billCol}>
-                <Link to={`/bill/${getBillURLId(bill)}`}>{bill.identifier}</Link>
+            <div className={styles.locationCol}>
+                TK
             </div>
-            
-            <div className={styles.billTitleCol}>{bill.title}</div>
+            <div className={styles.dateCol}>{vote.start_date} </div>
+            <div className={styles.descriptionCol}>{vote.bill_action}</div>
             <div className={styles.outcomeCol}
                 style={{backgroundColor: votePassed(vote) ? '#91cf60' : '#fc8d59'}}>
                 {`${glyph(vote)}${voteCountText(vote)}`}
-            </div>
-            <div className={styles.lawmakerVoteCol}
-                style={{backgroundColor: color(lawmakerVote)}}>
-                {lawmakerVote}
             </div>
             <div className={styles.compareVoteCol}
                 style={{backgroundColor: color(gopVote.caucus)}}>
@@ -76,8 +72,8 @@ const Vote = (vote, i, lawmaker) => {
                 {`${demVote.yes}-${demVote.no}`}
             </div>
             {/* <div className={styles.motionCol}>{} </div> */}
-            {/* <div className={styles.dateCol}>{vote.start_date} </div> */}
+            
         </div>
     </div>
 }
-export default LawmakerVotesViz
+export default BillVotesViz

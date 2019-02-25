@@ -14,10 +14,6 @@ class BillActionsViz extends Component {
         const actions = getImportantActions(bill)
         const rows = actions.map((action,i) => Row(action, i))
         return (<div>
-            <div className={styles.title}>
-                {bill.identifier}: Showing {actions.length} actions
-            </div>
-            
             <div className={styles.header}>
                 <div className={styles.actionCol}></div>
                 <div className={styles.dateCol}>Date</div>
