@@ -23,11 +23,16 @@
     
     display: flex;
     flex-direction: row;
-    /* align-items: center; */
+    align-items: center;
     flex-wrap: wrap;
     
 }
 
+.statusCol {
+    flex: 0 0 5rem;
+    font-size: 0.8rem;
+    padding: 0 0.2rem;
+}
 .idCol {
     /* font-style: italic; */
     font-size: 0.9rem;
@@ -50,20 +55,3 @@
     padding-top: 0.2rem;
 }
 
-.action {
-    margin-left: 0.1rem;
-    margin-bottom: 0.4rem;
-    height: 0.8rem;
-    flex: 0 0 0.8rem;
-    padding: 0 0.2rem;
-
-    border: 1px solid #222;
-
-    /*glyph*/
-    /* text-align: center; */
-    font-size: 0.8rem;
-    color: #222;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}

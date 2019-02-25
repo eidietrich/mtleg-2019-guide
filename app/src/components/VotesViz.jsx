@@ -10,13 +10,12 @@ import { Link } from 'react-router-dom'
 import styles from './VotesViz.module.css'
 
 import { getBillURLId, 
-    getVoteAyes, getVoteNays, getVoteBill, votePassed,
+    voteCountText, getVoteBill, votePassed,
     getLawmakerVote, gopLeadershipVote, demLeadershipVote, gopCaucusVote, demCaucusVote } from './../js/handling'
 
 class VotesViz extends Component {
     render() {    
         const votes = this.props.votes
-        console.log(votes)
         const rows = votes.map((vote, i) => Vote(vote, i))
         return (<div>
             <div className={styles.tableHeader}>
@@ -57,7 +56,7 @@ const Vote = (vote, i) => {
             <div className={styles.billTitleCol}>{bill.title}</div>
             <div className={styles.outcomeCol}
                 style={{backgroundColor: votePassed(vote) ? '#91cf60' : '#fc8d59'}}>
-                {`${glyph(vote)}${getVoteAyes(vote)}-${getVoteNays(vote)}`}
+                {`${glyph(vote)}${voteCountText(vote)}`}
             </div>
             <div className={styles.compareVoteCol}
                 style={{backgroundColor: color(gopVote.caucus)}}>

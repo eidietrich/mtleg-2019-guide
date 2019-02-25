@@ -1,0 +1,7 @@
+.statusIndicator {
+    border: 1px solid #666;
+    font-weight: bold;
+    padding: 0 0.2rem;
+    text-transform: uppercase;
+    text-align: center;
+}

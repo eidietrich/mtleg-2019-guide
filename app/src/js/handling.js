@@ -15,7 +15,7 @@ TODO: Go through here and make sure terminology is constand
 import bills from './../data/scrape-2019-02-23-bills.json'
 import votes from './../data/scrape-2019-02-23-votes.json'
 import lawmakers from './../data/leg-roster.json'
-import { IMPORTANT_ACTIONS, UNIMPORTANT_ACTIONS } from './config'
+import { IMPORTANT_ACTIONS, UNIMPORTANT_ACTIONS, BILL_STATUSES } from './config'
 
 export const getCommittees = (bill) => {
     return [... new Set(bill.actions.map(d => d.extras.committee))].filter(d => d !== "")
@@ -23,8 +23,8 @@ export const getCommittees = (bill) => {
 
 export const getSponsor = bill => bill.sponsorships.find(d => d.classification === 'primary').name
 
-export const getVotes = billId => votes.filter(d => d.bill === billId)
-    .sort((a,b) => new Date(a.start_date) - new Date(b.start_date))
+// export const getVotes = billId => votes.filter(d => d.bill === billId)
+//     .sort((a,b) => new Date(a.start_date) - new Date(b.start_date))
 
 export const getBillById = id => bills.find(d => d.identifier === id)
 export const getBillByScrapeId = id => bills.find(d => d._id === id)
@@ -55,6 +55,12 @@ export const getBillsWithAction = action => {
 export const getBillsForLawmaker = lawmaker => {
     return bills.filter(bill => getSponsor(bill) === lawmaker.name)
 }
+export const getBillSponsor = bill => {
+    const sponsorName = bill.sponsorships.find(d => d.classification === 'primary').name
+    const sponsor = getLawmakerByName(sponsorName)
+    return sponsor
+}
+export const getBillLawsUrl = bill => bill.sources[0].url
 
 export const sortByBillNumber = (a,b) => {
     const aType = a.identifier.slice(0,2)
@@ -93,6 +99,14 @@ export const getActionGlyph = action => {
 
 export const getLastBillAction = bill => getImportantActions(bill).slice(-1)[0].description
 
+export const getBillStatus = bill => {
+    const lastAction = IMPORTANT_ACTIONS.find(d => d.key === getLastBillAction(bill))
+    if (!lastAction) console.log('No match for ' + getLastBillAction(bill))
+    const status = BILL_STATUSES.find(d => d.key === lastAction.status)
+    if (!status) console.log('No match for ' + lastAction.status)
+    return status
+}
+
 // LAWMAKER HANDLING
 
 // only returns lawmakers who have sponsored bills, names only too
@@ -103,12 +117,18 @@ export const getAllLawmakers = () => {
     // const names = [...new Set(bills.map(bill => getSponsor(bill)).flat())]
     // return names.map(name => ({name: name}))
     return lawmakers
-} 
+}
+export const getLawmakerByName = (name) => lawmakers.find(d => d.name === name) 
 export const getLawmakerUrlName = (lawmaker) => lawmaker.name.replace(/\s/g, '')
 export const getLawmakerByURLName = (urlName) => {
     // const lawmakers = getAllLawmakers()
     const lawmaker = lawmakers.find(d => getLawmakerUrlName(d) === urlName)
     return lawmaker
+}
+export const getLawmakerByVoteName = (voteName) => {
+    const match = lawmakers.find(d => d.laws_vote_name === voteName) 
+    if (!match) console.log('getLawmakerByVoteName, No match for ' + voteName)
+    return match
 }
 export const lawmakerTitle = (lawmaker) => {
     if (lawmaker.chamber === 'house') return 'Rep.'
@@ -126,6 +146,8 @@ export const getFloorVotes = () => {
     return votes.filter(vote => vote.bill_action !== null)
         .sort(sortVoteByBillAndDate)
 }
+export const getBillVotes = (bill) => votes.filter(v => v.bill === bill._id)
+
 
 export const getMajorFloorVotes = () => {
     // exclude procedural things
@@ -146,16 +168,26 @@ export const sortVoteByBillAndDate = (a,b) => {
     else return sortByBillNumber(aBill, bBill)
 }
 export const sortVoteByMargin = (a,b) => {
-    const aMargin = getVoteAyes(a) - getVoteNays(a)
-    const bMargin = getVoteAyes(b) - getVoteNays(b)
+    const aMargin = getVoteYesCount(a) - getVoteNoCount(a)
+    const bMargin = getVoteYesCount(b) - getVoteNoCount(b)
     return aMargin - bMargin
 }
-
-export const getVoteAyes = (vote) => vote.counts.find(d => d.option === 'yes').value
-export const getVoteNays = (vote) => vote.counts.find(d => d.option === 'no').value
+// export const getYesVotes = (vote) => vote.votes.filter(d => d.option === 'yes')
+// export const getNoVotes = (vote) => vote.votes.filter(d => d.option === 'no')
+export const filterVotes = (vote, option, party) => {
+    if (!party) return vote.votes.filter(d => d.option === option)
+    return vote.votes.filter(d => d.option === option && getLawmakerByVoteName(d.voter_name).party === party)   
+}
+export const getAbsentExcusedVotes = (vote) => vote.votes.filter(d => ['excused','absent'].includes(d.option))
+// TODO: Change these to counts
+export const getVoteYesCount = (vote) => vote.counts.find(d => d.option === 'yes').value
+export const getVoteNoCount = (vote) => vote.counts.find(d => d.option === 'no').value
 export const getVoteBill = (vote) => getBillByScrapeId(vote.bill)
 export const getVoteAbsentExcused = (vote) => vote.counts.find(d => ['excused','absent'].includes(d.option)).value
-export const votePassed = (vote) => (getVoteAyes(vote) > getVoteNays(vote))
+export const votePassed = (vote) => (getVoteYesCount(vote) > getVoteNoCount(vote))
+export const voteCountText = (vote) => {
+    return `${getVoteYesCount(vote)}-${getVoteNoCount(vote)}`
+}
 
 
 export const getSecondReadingVotesForLawmaker = (lawmaker) => {

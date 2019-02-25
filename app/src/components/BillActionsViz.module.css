@@ -39,7 +39,7 @@
 }
 
 .descriptionCol {
-    flex: 0 0 15rem;
+    flex: 1 0 15rem;
 }
 .dateCol {
     flex: 0 0 6rem;

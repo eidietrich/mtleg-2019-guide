@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import styles from './LawmakerVotesViz.module.css'
 
 import { getBillURLId, 
-    getVoteAyes, getVoteNays, getVoteBill, votePassed,
+    voteCountText, getVoteBill, votePassed,
     getLawmakerVote, gopLeadershipVote, demLeadershipVote, gopCaucusVote, demCaucusVote } from './../js/handling'
 
 class LawmakerVotesViz extends Component {
@@ -59,7 +59,7 @@ const Vote = (vote, i, lawmaker) => {
             <div className={styles.billTitleCol}>{bill.title}</div>
             <div className={styles.outcomeCol}
                 style={{backgroundColor: votePassed(vote) ? '#91cf60' : '#fc8d59'}}>
-                {`${glyph(vote)}${getVoteAyes(vote)}-${getVoteNays(vote)}`}
+                {`${glyph(vote)}${voteCountText(vote)}`}
             </div>
             <div className={styles.lawmakerVoteCol}
                 style={{backgroundColor: color(lawmakerVote)}}>
