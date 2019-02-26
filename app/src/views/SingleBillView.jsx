@@ -16,14 +16,15 @@ class SingleBillView extends Component {
         const votes = getBillVotes(bill)
         return (<div>
             
-            <h2> {bill.identifier}: {bill.title}</h2>
+            <h1>{bill.identifier}</h1>
+            <div>{bill.title}</div>
             <BillStatus bill={bill} />
             <div>Sponsor: <Link to={`/lawmaker/${getLawmakerUrlName(sponsor)}`}>{sponsor.name}</Link>, {sponsor.party}-{sponsor.city}</div>
             
-            <h3>Process</h3>
+            <h2>Process</h2>
             <BillActionsViz bill={bill} />
 
-            <h3>Votes</h3>
+            <h2>Votes</h2>
             <BillVotesViz bill={bill} />
 
             <br />

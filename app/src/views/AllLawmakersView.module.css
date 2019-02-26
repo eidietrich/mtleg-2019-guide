@@ -1,0 +1,44 @@
+.lawmakerContainer {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-evenly; */
+}
+
+.lawmaker {
+    border: 1px solid #ddd;
+    border-left: 5px solid #444;
+    background-color: #eee;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+
+    flex: 0 1 15rem;
+
+    text-decoration: none;
+    color: #222;
+
+}
+.lawmaker:hover {
+    text-decoration: none;
+    background-color: #222;
+    color: white;
+}
+
+.district {
+    font-size: 0.8em;
+}
+
+.name {
+    font-size: 1.2em;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    font-weight: bold;
+    color: var(--mtfp-action-color);
+}
+.lawmaker:hover .name {
+    color: white;
+}
+
+.locale {
+    font-style: italic;
+}

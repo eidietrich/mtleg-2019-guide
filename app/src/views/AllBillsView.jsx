@@ -12,7 +12,8 @@ class AllBillsView extends Component {
             <div>{bills.length} of them introduced.</div>
             <div>TK: Filtering options</div>
             <BillsProcessViz bills={bills}/>
-            <div>Source: Montana <a href='http://laws.leg.mt.gov/legprd/LAW0217W$BAIV.return_all_bills?P_SESS=20191'>LAWS system</a>. Data obtained using web scrapers adapted from <a href="https://openstates.org/">OpenState.org</a>.</div>
+            <br/>
+            <div>See also: LAWS system <a href='http://laws.leg.mt.gov/legprd/LAW0217W$BAIV.return_all_bills?P_SESS=20191'>bills page</a>.</div>
         </div>);
     }
   }

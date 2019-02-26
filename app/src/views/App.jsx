@@ -1,51 +1,42 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-// import './App.css';
 import styles from './App.module.css'
-// import BillsTable from '../components/BillsTable'
-import BillsProcessViz from '../components/BillsProcessViz'
-
+import './App.css'
 
 import LawmakerView from './LawmakerView'
 import SingleBillView from './SingleBillView'
 import AllBillsView from './AllBillsView'
 import AllVotesView from './AllVotesView'
+import AllLawmakersView from './AllLawmakersView'
 
 
-import { getBillsForLawmaker, getBillsSample, getAllBills, getBillByURLId,
-   getAllLawmakers, getLawmakerUrlName, getLawmakerByURLName, lawmakerTitle
-  } from '../js/handling'
-
-
-
-import * as d3 from 'd3'
-
-const f = d3.format(',')
-const selLawmaker = 'Mary Ann Dunwell'
-const votes = []
+import { getLawmakerByURLName, getBillByURLId } from '../js/handling'
 
 class App extends Component {
   render() {
     return (<Router>
       <div className={styles.app}>
-      <Link to="/">Home</Link>
+      <Link className={styles.headerLink} to="/">Home</Link>
       {' - '} 
-      <Link to="/lawmakers">All Lawmakers</Link>
+      <Link className={styles.headerLink} to="/lawmakers">All Lawmakers</Link>
       {' - '} 
-      <Link to="/bills">All Bills</Link>
+      <Link className={styles.headerLink} to="/bills">All Bills</Link>
 
-      <hr />
+      <hr className={styles.rule}/>
 
       <Route exact path="/" component={Home} />
 
       <Route path="/bills" component={AllBillsView} />
       <Route path="/bill/:id" component={BillByUrl} />
 
-      <Route path="/lawmakers" component={LawmakerList} />
+      <Route path="/lawmakers" component={AllLawmakersView} />
       <Route path="/lawmaker/:name" component={LawmakerByUrl} />
 
       <Route path="/votes" component={AllVotesView} />
+
+      <hr className={styles.rule}/>
+      <div>Source: Montana <a href='http://laws.leg.mt.gov/legprd/law0203w$.startup?P_SESS=20191'>LAWS system</a>. Data obtained using web scrapers adapted from <a href="https://openstates.org/">OpenState.org</a>.</div>
       </div>
     </Router>)
   }
@@ -75,29 +66,6 @@ const BillByUrl = ({ match }) => {
 }
 const LawmakerByUrl = ({ match }) => {
   return <LawmakerView lawmaker={getLawmakerByURLName(match.params.name)}/>
-}
-
-const LawmakerList = () => {
-  const lawmakers = getAllLawmakers()
-  const rows = lawmakers.map((lawmaker,i) => {
-    const name = lawmaker.name
-    const title = lawmakerTitle(lawmaker)
-    const url = getLawmakerUrlName(lawmaker)
-    return (
-      <li key={String(i)}>
-        <Link to={`/lawmaker/${url}`}>{title} {name}, {lawmaker.party}-{lawmaker.city}</Link>
-      </li>
-    )
-  })
-  return <div>
-    <h1>Lawmakers</h1>
-    <div>Formatting TK</div>
-    <div>Search reps by address/city TK</div>
-    <ul>
-      {rows}
-    </ul>
-  </div>
-    
 }
 
 export default App;

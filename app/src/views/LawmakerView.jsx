@@ -16,16 +16,15 @@ class LawmakerView extends Component {
         const bills = getBillsForLawmaker(lawmaker)
 
         return (<div>
-            <div className={styles.header}>
-                {`${lawmakerTitle(lawmaker)} ${lawmaker.name}, ${lawmaker.party}-${lawmaker.city}`}
-            </div>
+            <h1>{`${lawmakerTitle(lawmaker)} ${lawmaker.name}`}</h1>
+            <div>{lawmaker.party}-{lawmaker.city}</div>
             <div>TK other lawmaker info</div>
             <br/>
-            <div className={styles.subHead}>Bills sponsored ({bills.length})</div>
+            <h2>Sponsored bills</h2>
             <div>TK summary stats: Passed into law, dead, tabled, in process</div>
             <BillsProcessViz bills={bills} />
             <br />
-            <div className={styles.subHead}>Floor votes</div>
+            <h2>Floor votes</h2>
             <div>Showing 2nd reading</div>
             <div>TK summary stats: % with majority, % with party</div>
             <div>TK Filtering options (All, with party, against party, tight votes, newsworthy votes)</div>

@@ -1,0 +1,63 @@
+:root {
+    --mtfp-action-color: #2800d7
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+a {
+    color: var(--mtfp-action-color);
+    text-decoration: none;
+}
+a:hover {
+    /* color: red; */
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4 {
+    font-family: proxima-nova, sans-serif;
+    font-weight: 800;
+    font-style: normal;
+}
+
+hr {
+    border-top: 1px solid #666;
+    border-bottom: none;
+}
+
+input {
+    /* background-color: red; */
+    display: block;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    /* border-radius: .25rem; */
+}
+
+button {
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    border: none;
+    background-color: var(--mtfp-action-color);
+    border: 1px solid var(--mtfp-action-color);
+    text-transform: uppercase;
+    color: #fff;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    cursor: pointer;
+    /* border-radius: 0.25rem; */
+}
+
+button:hover {
+    background-color: #222;
+}

@@ -118,7 +118,16 @@ export const getAllLawmakers = () => {
     // return names.map(name => ({name: name}))
     return lawmakers
 }
+export const sortBySponsorshipCounts = (a,b) => getBillsForLawmaker(b).length - getBillsForLawmaker(a).length
+export const sortByDistrict = (a,b) => +a.district.slice(3,) - +b.district.slice(3,)
+
+
 export const getLawmakerByName = (name) => lawmakers.find(d => d.name === name) 
+export const getLawmakerByDistrict = (district) => {
+    const clean = (s) => s.replace(/\s/g, '').toUpperCase()
+    return lawmakers.find(d => clean(d.district) === clean(district))
+}
+
 export const getLawmakerUrlName = (lawmaker) => lawmaker.name.replace(/\s/g, '')
 export const getLawmakerByURLName = (urlName) => {
     // const lawmakers = getAllLawmakers()
