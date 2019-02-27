@@ -1,0 +1,17 @@
+.addressForm {
+    display: flex;
+    flex-wrap: wrap;
+}
+.textInput {
+    /* color: red; */
+    /* min-width: 20rem; */
+    flex: 4 1 15rem;
+}
+.searchButton {
+    flex: 1 1 auto;
+}
+
+.message {
+    font-style: italic;
+    font-size: 0.8em;
+}

@@ -8,9 +8,9 @@ import React, { Component } from 'react'
 
 import styles from './BillVotesViz.module.css'
 
-import { getBillURLId, getBillVotes, sortVoteByBillAndDate,
-    voteCountText, getVoteBill, votePassed,
-    getLawmakerVote, gopLeadershipVote, demLeadershipVote, gopCaucusVote, demCaucusVote } from './../js/handling'
+import {getBillVotes, sortVoteByBillAndDate, getVoteLawsUrl,
+    voteCountText, votePassed,
+    gopCaucusVote, demCaucusVote } from './../js/handling'
 
 class BillVotesViz extends Component {
     render() {    
@@ -21,13 +21,11 @@ class BillVotesViz extends Component {
         const rows = votes.map((vote, i) => Vote(vote, i))
         return (<div className={styles.table}>
             <div className={styles.tableHeader}>
-                <div className={styles.locationCol}>Location</div>
                 <div className={styles.dateCol}>Date</div>
                 <div className={styles.descriptionCol}>Action</div>
                 <div className={styles.outcomeCol}>Vote</div>
-                <div className={styles.compareVoteCol}>GOP caucus</div>
-                <div className={styles.compareVoteCol}>Dem caucus</div>
-                
+                <div className={styles.compareVoteCol}>Republican caucus</div>
+                <div className={styles.compareVoteCol}>Democratic caucus</div>
             </div>
             <div className={styles.rowContainer}>
                 {rows}
@@ -44,22 +42,19 @@ const Vote = (vote, i) => {
         else return '#ddd'
     }
     const glyph = (vote) => votePassed(vote) ? '✓': '✗'
-    const passGlyph = (pass) => (pass === 'yes') ? '✓': '✗'
 
-    const bill = getVoteBill(vote)
     const gopVote = gopCaucusVote(vote)
     const demVote = demCaucusVote(vote)
     console.log(vote)
     return <div key={String(i)}>
         <div className={styles.voteRow}>
-            <div className={styles.locationCol}>
-                TK
-            </div>
             <div className={styles.dateCol}>{vote.start_date} </div>
-            <div className={styles.descriptionCol}>{vote.bill_action}</div>
+            <div className={styles.descriptionCol}>{vote.bill_action || 'Committee Action'}</div>
             <div className={styles.outcomeCol}
                 style={{backgroundColor: votePassed(vote) ? '#91cf60' : '#fc8d59'}}>
-                {`${glyph(vote)}${voteCountText(vote)}`}
+                <a href={getVoteLawsUrl(vote)} target="_blank" rel="noopener noreferrer">
+                    {`${glyph(vote)}${voteCountText(vote)}`}
+                </a>
             </div>
             <div className={styles.compareVoteCol}
                 style={{backgroundColor: color(gopVote.caucus)}}>

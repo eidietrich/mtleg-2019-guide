@@ -1,5 +1,12 @@
+
+
 .table {
     overflow: scroll;
+    margin-top: 0.5rem;
+}
+.votesCount {
+    font-style: italic;
+    font-size: 0.8em;
 }
 .tableHeader {
     display: flex;
@@ -44,24 +51,20 @@
     margin-right: 0.2rem;
 }
 
+.outcomeCol a {
+    color: #000;
+}
+
 .rowContainer .billCol {
     font-weight: bold;
 }
-.rowContainer .billCol a {
-    color: #222;
-    text-decoration: none;
-}
-.rowContainer .billCol a:hover {
-    color: blue;
-    /* text-decoration: underline; */
-}
+
 .rowContainer .outcomeCol {
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.8em;
-    opacity: 0.8;
     max-height: 2rem;
     
 }

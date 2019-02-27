@@ -3,6 +3,11 @@
     margin-top: 1rem;
 }
 
+.billCount {
+    font-style: italic;
+    font-size: 0.8em;
+}
+
 .header {
     /* background-color: #666; */
     /* font-weight: bold; */
@@ -28,23 +33,22 @@
     
 }
 
+.row .idCol {
+    font-weight: bold;
+}
+
 .statusCol {
-    flex: 0 0 5rem;
+    flex: 0 0 9rem;
     font-size: 0.8rem;
-    padding: 0 0.2rem;
 }
 .idCol {
-    /* font-style: italic; */
-    font-size: 0.9rem;
-    /* text-align: right; */
-    /* margin-right: 5px; */
-    padding: 2px;
+    padding: 0 0.2rem;
     flex: 0 0 auto;
 }
 .titleCol {
     font-style: italic;
     font-size: 0.9rem;
-    padding: 2px;
+    padding: 0 0.2rem
 }
 .actionsCol {
     flex: 1 0 100%;

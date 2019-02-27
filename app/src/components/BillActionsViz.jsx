@@ -6,7 +6,7 @@ import styles from './BillActionsViz.module.css';
 
 import BillAction from './BillAction'
 
-import { getImportantActions, getActionColor, getActionGlyph } from './../js/handling'
+import { getImportantActions } from './../js/handling'
 
 class BillActionsViz extends Component {
     render() {
@@ -18,9 +18,6 @@ class BillActionsViz extends Component {
                 <div className={styles.actionCol}></div>
                 <div className={styles.dateCol}>Date</div>
                 <div className={styles.descriptionCol}>Action</div>
-                
-                {/* <div className={styles.bodyCol}>Body</div> */}
-                
             </div>
             <div className={styles.rowsContainer}>
                 {rows}
@@ -36,19 +33,7 @@ const Row = (action, i) => {
         </div>
         <div className={styles.dateCol}>{action.date}</div>
         <div className={styles.descriptionCol}>{action.description}</div>
-        {/* <div className={styles.bodyCol}>TK</div> */}
     </div>)
 }
-
-// const Action = (action, i) => {
-//     return <div
-//         key={String(i)}
-//         className={styles.action}
-//         style={{backgroundColor: getActionColor(action)}}
-//         onClick={d => console.log(action.description, action.date)}
-//         >
-//         {getActionGlyph(action)}
-//     </div>
-// }
 
 export default BillActionsViz

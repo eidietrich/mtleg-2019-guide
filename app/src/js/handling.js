@@ -17,8 +17,13 @@ import votes from './../data/scrape-2019-02-23-votes.json'
 import lawmakers from './../data/leg-roster.json'
 import { IMPORTANT_ACTIONS, UNIMPORTANT_ACTIONS, BILL_STATUSES } from './config'
 
+import {format} from 'd3'
+
+export const percentFormat = format('.0%')
+export const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)
+
 export const getCommittees = (bill) => {
-    return [... new Set(bill.actions.map(d => d.extras.committee))].filter(d => d !== "")
+    return [...new Set(bill.actions.map(d => d.extras.committee))].filter(d => d !== "")
   }
 
 export const getSponsor = bill => bill.sponsorships.find(d => d.classification === 'primary').name
@@ -157,6 +162,7 @@ export const getFloorVotes = () => {
 }
 export const getBillVotes = (bill) => votes.filter(v => v.bill === bill._id)
 
+export const getVoteLawsUrl = (vote) => vote.sources[0].url
 
 export const getMajorFloorVotes = () => {
     // exclude procedural things
@@ -223,10 +229,10 @@ export const demLeadershipVote = (vote) => vote.votes.find(d => demLeaders.inclu
 export const voteWithDemLeader = (vote, lawmaker) => {
     // only works for floor votes
     const lawmakerVote = getLawmakerVote(vote, lawmaker)
-    const demLeadershipVote = demLeadershipVote(vote)
+    const dem = demLeadershipVote(vote)
     if (lawmakerVote === 'excused' || lawmakerVote === 'absent') return 'yes'
-    if (demLeadershipVote === 'excused' || lawmakerVote === 'absent') return 'n/a'
-    return (lawmakerVote === demLeadershipVote) ? 'yes' : 'no'
+    if (dem === 'excused' || lawmakerVote === 'absent') return 'n/a'
+    return (lawmakerVote === dem) ? 'yes' : 'no'
 }
 
 export const gopCaucusVote = (vote) => {
@@ -254,6 +260,38 @@ export const demCaucusVote = (vote) => {
         absent: absent,
         caucus: (ayes > nays) ? 'yes' : 'no',
     }
+}
+export const lawmakerVoteWithGopCaucus = (vote, lawmaker) => {
+    const lawmakerVote = getLawmakerVote(vote, lawmaker)
+    const caucusVote = gopCaucusVote(vote).caucus
+    return lawmakerVote === caucusVote
+}
+export const lawmakerVoteWithDemCaucus = (vote, lawmaker) => {
+    const lawmakerVote = getLawmakerVote(vote, lawmaker)
+    const caucusVote = demCaucusVote(vote)
+    return lawmakerVote === caucusVote.caucus
+}
+export const lawmakerVoteWithMajority = (vote, lawmaker) => {
+    const lawmakerVote = getLawmakerVote(vote, lawmaker)
+    const majorityVote = votePassed(vote) ? 'yes' : 'no'
+    return lawmakerVote === majorityVote
+}
+
+// VOTE SUMMARY AGGREGATION FUNCTION
+export const percentVotesWithMajority = (votes, lawmaker) => {
+    const numVotes = votes.length
+    const votesWithMajority = votes.filter(vote => lawmakerVoteWithMajority(vote, lawmaker)).length
+    return percentFormat(votesWithMajority / numVotes)
+}
+export const percentVotesWithGopCaucus = (votes, lawmaker) => {
+    const numVotes = votes.length
+    const votesWithGop = votes.filter(vote => lawmakerVoteWithGopCaucus(vote, lawmaker)).length
+    return percentFormat(votesWithGop / numVotes)
+}
+export const percentVotesWithDemCaucus = (votes, lawmaker) => {
+    const numVotes = votes.length
+    const votesWithDems = votes.filter(vote => lawmakerVoteWithDemCaucus(vote, lawmaker)).length
+    return percentFormat(votesWithDems / numVotes)
 }
 
 // export const getLawmakerVote = (vote, name) => {

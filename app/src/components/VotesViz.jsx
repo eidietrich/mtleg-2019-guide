@@ -1,17 +1,11 @@
-/*
-    Component for doing comparative vote visualizations 
-    e.g. compare all 
-
-*/
-
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from './VotesViz.module.css'
 
-import { getBillURLId, 
+import { getBillURLId, getVoteLawsUrl,
     voteCountText, getVoteBill, votePassed,
-    getLawmakerVote, gopLeadershipVote, demLeadershipVote, gopCaucusVote, demCaucusVote } from './../js/handling'
+    gopCaucusVote, demCaucusVote } from './../js/handling'
 
 class VotesViz extends Component {
     render() {    
@@ -34,19 +28,16 @@ class VotesViz extends Component {
   }
 
 const Vote = (vote, i) => {
-    // console.log(vote)
     const color = (d) => {
         if (d === 'yes') return '#91cf60'
         if (d === 'no') return '#fc8d59'
         else return '#ddd'
     }
     const glyph = (vote) => votePassed(vote) ? '✓': '✗'
-    const passGlyph = (pass) => (pass === 'yes') ? '✓': '✗'
 
     const bill = getVoteBill(vote)
     const gopVote = gopCaucusVote(vote)
     const demVote = demCaucusVote(vote)
-    // console.log(gopVote, demVote)
     return <div key={String(i)}>
         <div className={styles.voteRow}>
             <div className={styles.billCol}>
@@ -56,19 +47,18 @@ const Vote = (vote, i) => {
             <div className={styles.billTitleCol}>{bill.title}</div>
             <div className={styles.outcomeCol}
                 style={{backgroundColor: votePassed(vote) ? '#91cf60' : '#fc8d59'}}>
-                {`${glyph(vote)}${voteCountText(vote)}`}
+                <a href={getVoteLawsUrl(vote)} target="_blank" rel="noopener noreferrer">
+                    {`${glyph(vote)}${voteCountText(vote)}`}
+                </a>
             </div>
             <div className={styles.compareVoteCol}
                 style={{backgroundColor: color(gopVote.caucus)}}>
-                {/* {gopVote.caucus} */}
                 {`${gopVote.yes}-${gopVote.no}`}
             </div>
             <div className={styles.compareVoteCol}
                 style={{backgroundColor: color(demVote.caucus)}}>
-                {/* {gopVote.caucus} */}
                 {`${demVote.yes}-${demVote.no}`}
             </div>
-            {/* <div className={styles.motionCol}>{} </div> */}
             <div className={styles.dateCol}>{vote.start_date} </div>
         </div>
     </div>

@@ -1,0 +1,33 @@
+.lawmakerVotesSummary {
+    border: 1px solid #ddd;
+    margin: 0.5rem 0;
+    /* padding: 0.5rem; */
+}
+
+.header {
+    font-weight: bold;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.stat {
+    text-align: center;
+    /* margin-right: 1rem; */
+    margin: 0.5rem 1rem;
+    
+    flex: 0 1 10rem;
+}
+
+.percent {
+    font-weight: bold;
+    font-size: 3em;
+    
+}
+.label {
+    font-weight: bold;
+    color: #444;
+}

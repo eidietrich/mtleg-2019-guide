@@ -9,9 +9,9 @@ import { Link } from 'react-router-dom'
 
 import styles from './LawmakerVotesViz.module.css'
 
-import { getBillURLId, 
+import { getBillURLId, getVoteLawsUrl,
     voteCountText, getVoteBill, votePassed,
-    getLawmakerVote, gopLeadershipVote, demLeadershipVote, gopCaucusVote, demCaucusVote } from './../js/handling'
+    getLawmakerVote, gopCaucusVote, demCaucusVote } from './../js/handling'
 
 class LawmakerVotesViz extends Component {
     render() {    
@@ -19,6 +19,7 @@ class LawmakerVotesViz extends Component {
         const lawmaker = this.props.lawmaker
         const rows = votes.map((vote, i) => Vote(vote, i, lawmaker))
         return (<div className={styles.table}>
+            <div className={styles.votesCount}>Showing {votes.length} votes</div>
             <div className={styles.tableHeader}>
                 <div className={styles.firstColGroup}></div>
                 <div className={styles.billCol}>Bill</div>
@@ -36,14 +37,13 @@ class LawmakerVotesViz extends Component {
   }
 
 const Vote = (vote, i, lawmaker) => {
-    // console.log(vote)
+    console.log(vote)
     const color = (d) => {
         if (d === 'yes') return '#91cf60'
         if (d === 'no') return '#fc8d59'
         else return '#ddd'
     }
     const glyph = (vote) => votePassed(vote) ? '✓': '✗'
-    const passGlyph = (pass) => (pass === 'yes') ? '✓': '✗'
 
     const bill = getVoteBill(vote)
     const lawmakerVote = getLawmakerVote(vote, lawmaker)
@@ -59,7 +59,9 @@ const Vote = (vote, i, lawmaker) => {
             <div className={styles.billTitleCol}>{bill.title}</div>
             <div className={styles.outcomeCol}
                 style={{backgroundColor: votePassed(vote) ? '#91cf60' : '#fc8d59'}}>
-                {`${glyph(vote)}${voteCountText(vote)}`}
+                <a href={getVoteLawsUrl(vote)} target="_blank" rel="noopener noreferrer">
+                    {`${glyph(vote)}${voteCountText(vote)}`}
+                </a>
             </div>
             <div className={styles.lawmakerVoteCol}
                 style={{backgroundColor: color(lawmakerVote)}}>

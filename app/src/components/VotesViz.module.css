@@ -35,6 +35,10 @@
 .dateCol {
     flex: 0 0 5rem;
 }
+.outcomeCol a {
+    color: black;
+}
+
 .rowContainer .dateCol {
     font-size: 0.8em;
     color: #444;

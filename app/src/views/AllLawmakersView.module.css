@@ -1,7 +1,33 @@
+.searchLabel {
+    /* font-weight: bold; */
+    font-size: 0.8em;
+}
+
+.searchMessage {
+    font-style: italic;
+    font-size: 0.8em;
+}
+
 .lawmakerContainer {
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: space-evenly; */
+    justify-content: center;
+}
+
+.chambers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.chamberHeader {
+    text-align: center;
+}
+    
+.chamber {
+    flex: 1 1 20rem;
+    margin: 0 1rem;
+    justify-content: center;
 }
 
 .lawmaker {
@@ -12,7 +38,7 @@
     margin-right: 0.5rem;
     padding: 0.5rem;
 
-    flex: 0 1 15rem;
+    flex: 1 1 8rem;
 
     text-decoration: none;
     color: #222;
@@ -41,4 +67,11 @@
 
 .locale {
     font-style: italic;
+}
+.data {
+    font-weight: bold;
+}
+
+.sourcing {
+    margin-top: 0.5rem;
 }

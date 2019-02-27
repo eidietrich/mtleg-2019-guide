@@ -4,12 +4,12 @@ import styles from './DistrictFromAddressForm.module.css'
 
 import DistrictMatcher from '../js/DistrictMatcher'
 
-const defaultAddress = '1301 E 6th Ave, Helena, MT 59601'
+const defaultAddress = 'e.g. 1301 E 6th Ave, Helena, MT 59601'
 class DistrictFromAddressForm extends Component {
     constructor(props){
       super(props)
       this.state = {
-        value: '1301 E 6th Ave, Helena, MT 59601',
+        value: '',
         message: null,
       }
 
@@ -34,28 +34,22 @@ class DistrictFromAddressForm extends Component {
     }
 
     handleResult(lawmakers, location){
-      this.setState({message: `Matched to: ${location.address}`})
+      this.setState({message: `Found ${location.address}`})
       this.props.setFilter(lawmakers)
+      this.props.setMessage(`Found ${location.address}`)
     }
 
     handleFailedSubmit(){
       this.setState({message: 'Invalid Montana address'})
+      this.props.setMessage('Invalid Montana address')
     }
   
     render(){
-      return <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            <input className="text" type="address" value={this.state.value}
+      return <div className={styles.addressForm}>
+          <input className={styles.textInput} type="address" value={this.state.value}
               onChange={this.handleChange}
               placeholder={defaultAddress} />
-          </label>
-          <button type="submit">Submit</button>
-          <div className={styles.message}>
-            {this.state.message ? this.state.message : null}
-          </div>
-          
-        </form>
+          <button className={styles.searchButton} onClick={this.handleSubmit}>Search</button>
       </div>
     }
   

@@ -1,0 +1,12 @@
+.byline {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.update {
+    font-style: italic;
+}
+
+.number {
+    font-weight: bold;
+}

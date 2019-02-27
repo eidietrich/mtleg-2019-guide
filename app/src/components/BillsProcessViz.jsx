@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import BillStatus from './BillStatus'
-import BillAction from './BillAction'
+// import BillAction from './BillAction'
 
 import styles from './BillsProcessViz.module.css'; 
 
-import { getImportantActions, getActionColor, sortByBillNumber, getActionGlyph,
-     getBillURLId
+import { 
+    sortByBillNumber, 
+    // getImportantActions, 
+    getBillURLId
     } from './../js/handling'
 
 class BillsProcessViz extends Component {
@@ -18,6 +20,7 @@ class BillsProcessViz extends Component {
             .map(bill => Row(bill))
     
         return (<div className={styles.billProcessViz}>
+            <div className={styles.billCount}>Showing {bills.length} bills</div>
             <div className={styles.rowsContainer}>
                 {rows}
             </div>
@@ -26,8 +29,8 @@ class BillsProcessViz extends Component {
   }
 
 const Row = (bill) => {
-    const actions = getImportantActions(bill)
-        .map((action, i) => BillAction(action, i))
+    // const actions = getImportantActions(bill)
+    //     .map((action, i) => BillAction(action, i))
     
     return (<div key={bill.identifier} className={styles.row}>
         <div className={styles.statusCol}>
