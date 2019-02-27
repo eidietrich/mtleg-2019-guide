@@ -10,7 +10,7 @@ import Home from './Home'
 import SingleLawmakerView from './SingleLawmakerView'
 import SingleBillView from './SingleBillView'
 import AllBillsView from './AllBillsView'
-import AllVotesView from './AllVotesView'
+// import AllVotesView from './AllVotesView'
 import AllLawmakersView from './AllLawmakersView'
 
 import { getLawmakerByURLName, getBillByURLId } from '../js/handling'
@@ -38,7 +38,7 @@ class App extends Component {
         <Route path="/lawmakers" component={AllLawmakersView} />
         <Route path="/lawmaker/:name" component={LawmakerByUrl} />
 
-        <Route path="/votes" component={AllVotesView} />
+        {/* <Route path="/votes" component={AllVotesView} /> */}
 
         <hr className={styles.rule}/>
         <br />
