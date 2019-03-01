@@ -165,11 +165,23 @@ class MTBillScraper(Scraper, LXMLMixin):
                             re.IGNORECASE).groups()
         bill_id = "{0} {1}".format(bill_id[0], int(bill_id[1]))
 
+        # Bill title
         try:
             xp = '//b[text()="Short Title:"]/../following-sibling::td/text()'
             title = page.xpath(xp).pop()
         except IndexError:
             title = page.xpath('//tr[1]/td[2]')[0].text_content()
+
+        # Bill status
+        try:
+            # xp = '//strong[text()="Current Bill Progress:"]'
+            xp = '//a[@name="ba_table"]/font[1]/font/text()'
+            status = page.xpath(xp)[0].strip()
+            # print('Status', status)
+
+        except IndexError:
+            print (bill_id, 'No Bill status found')
+            status = ''
 
         # Add bill type.
         _bill_id = bill_id.lower()
@@ -227,6 +239,9 @@ class MTBillScraper(Scraper, LXMLMixin):
                 val = val[0]
 
             bill.extras[key] = val
+        
+        # Add bill status (MTFP custom)
+        bill.extras['status'] = status
 
         # Add bill subjects.
         xp = '//th[contains(., "Revenue/Approp.")]/ancestor::table/tr'
