@@ -37,7 +37,7 @@ const Row = (bill) => {
             <BillStatus bill={bill} />
         </div>
         <div className={styles.idCol}>
-           <Link to={`/bill/${getBillURLId(bill)}`}>{bill.identifier}</Link>
+           <Link to={`${process.env.PUBLIC_URL}/bill/${getBillURLId(bill)}`}>{bill.identifier}</Link>
         </div>
         <div className={styles.titleCol}>
            {bill.title}

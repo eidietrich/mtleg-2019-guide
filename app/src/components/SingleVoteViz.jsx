@@ -24,9 +24,9 @@ class SingleVoteViz extends Component {
             </div>
             <div className={styles.tableHeader}>
                 <div className={styles.yesCol}>GOP for</div>
-                <div className={styles.yesCol}>Dem for</div>
+                <div className={styles.yesCol}>Dem. for</div>
                 <div className={styles.noCol}>GOP against</div>
-                <div className={styles.noCol}>Dem against</div>
+                <div className={styles.noCol}>Dem. against</div>
             </div>
             <div className={styles.tableRows}>
                 <div className={styles.yesCol}>
@@ -56,7 +56,7 @@ const Column = (props) => {
 const Lawmaker = (laws_vote_name) => {
     const lawmaker = getLawmakerByVoteName(laws_vote_name)
     return <div key={lawmaker.laws_vote_name}>
-        <Link to={`/lawmaker/${getLawmakerUrlName(lawmaker)}`}>{lawmaker.name}</Link>
+        <Link to={`${process.env.PUBLIC_URL}/lawmaker/${getLawmakerUrlName(lawmaker)}`}>{lawmaker.name}</Link>
     </div>
 }
 

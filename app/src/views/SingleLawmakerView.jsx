@@ -35,6 +35,9 @@ class LawmakerView extends Component {
             <h2>Floor votes</h2>
             <div className={styles.label}>Second readings on {cap(lawmaker.chamber)} floor</div>
             <LawmakerVotesSummary lawmaker={lawmaker} votes={votes} />
+            <div className={styles.note}>
+                <p>Statistics calculated for second reading floor votes only. The majority vote percent figure indicates how often the lawmaker has voted with at least half their fellow lawmakers in both parties. Party vote statistics indicate how often the lawmaker has voted with a majority of members in that party's caucus.</p>
+            </div>
             <ButtonBar
                 buttons={[
                     {

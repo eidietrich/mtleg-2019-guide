@@ -1,0 +1,19 @@
+{
+  "main.css": "/apps/bill-app-test/static/css/main.613968f3.chunk.css",
+  "main.js": "/apps/bill-app-test/static/js/main.8b7d1191.chunk.js",
+  "main.js.map": "/apps/bill-app-test/static/js/main.8b7d1191.chunk.js.map",
+  "runtime~main.js": "/apps/bill-app-test/static/js/runtime~main.5144a43a.js",
+  "runtime~main.js.map": "/apps/bill-app-test/static/js/runtime~main.5144a43a.js.map",
+  "static/css/2.c9d06199.chunk.css": "/apps/bill-app-test/static/css/2.c9d06199.chunk.css",
+  "static/js/2.3dd0fc5c.chunk.js": "/apps/bill-app-test/static/js/2.3dd0fc5c.chunk.js",
+  "static/js/2.3dd0fc5c.chunk.js.map": "/apps/bill-app-test/static/js/2.3dd0fc5c.chunk.js.map",
+  "index.html": "/apps/bill-app-test/index.html",
+  "precache-manifest.4b3cdc94a4aa01954283f0644cfe1052.js": "/apps/bill-app-test/precache-manifest.4b3cdc94a4aa01954283f0644cfe1052.js",
+  "service-worker.js": "/apps/bill-app-test/service-worker.js",
+  "static/css/2.c9d06199.chunk.css.map": "/apps/bill-app-test/static/css/2.c9d06199.chunk.css.map",
+  "static/css/main.613968f3.chunk.css.map": "/apps/bill-app-test/static/css/main.613968f3.chunk.css.map",
+  "static/media/committee.jpg": "/apps/bill-app-test/static/media/committee.213ff217.jpg",
+  "static/media/house-floor.jpg": "/apps/bill-app-test/static/media/house-floor.757b727c.jpg",
+  "static/media/mtfp-logo-letters-only.png": "/apps/bill-app-test/static/media/mtfp-logo-letters-only.7b75fccf.png",
+  "static/media/vote-buttons.jpg": "/apps/bill-app-test/static/media/vote-buttons.2bb58833.jpg"
+}

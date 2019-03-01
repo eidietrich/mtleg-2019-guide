@@ -5,5 +5,9 @@
 
 .sponsor {
     font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.billText {
     margin-bottom: 1rem;
 }

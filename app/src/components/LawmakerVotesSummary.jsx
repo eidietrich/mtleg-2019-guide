@@ -16,7 +16,7 @@ class LawmakerVotesSummary extends Component {
             <div className={styles.stats}>
                 <div className={styles.stat}>
                     <div className={styles.percent}>{percentVotesWithMajority(votes, lawmaker)}</div>
-                    <div className={styles.label}>of votes with {cap(lawmaker.chamber)} majority</div>
+                    <div className={styles.label}>of votes with majority of body</div>
                 </div>
                 <div className={styles.stat}>
                     <div className={styles.percent}>{percentVotesWithGopCaucus(votes, lawmaker)}</div>

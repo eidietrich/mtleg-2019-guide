@@ -1,9 +1,3 @@
-/*
-    Component for doing comparative vote visualizations 
-    e.g. compare all 
-
-*/
-
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -27,7 +21,7 @@ class LawmakerVotesViz extends Component {
                 <div className={styles.outcomeCol}>Outcome (Yes&#8209;No)</div>
                 <div className={styles.lawmakerVoteCol}>{lawmaker.name}</div>
                 <div className={styles.compareVoteCol}>GOP caucus</div>
-                <div className={styles.compareVoteCol}>Dem caucus</div>
+                <div className={styles.compareVoteCol}>Dem. caucus</div>
             </div>
             <div className={styles.rowContainer}>
                 {rows}
@@ -37,7 +31,7 @@ class LawmakerVotesViz extends Component {
   }
 
 const Vote = (vote, i, lawmaker) => {
-    console.log(vote)
+    // console.log(vote)
     const color = (d) => {
         if (d === 'yes') return '#91cf60'
         if (d === 'no') return '#fc8d59'
@@ -53,7 +47,7 @@ const Vote = (vote, i, lawmaker) => {
     return <div key={String(i)}>
         <div className={styles.voteRow}>
             <div className={styles.billCol}>
-                <Link to={`/bill/${getBillURLId(bill)}`}>{bill.identifier}</Link>
+                <Link to={`${process.env.PUBLIC_URL}/bill/${getBillURLId(bill)}`}>{bill.identifier}</Link>
             </div>
             
             <div className={styles.billTitleCol}>{bill.title}</div>

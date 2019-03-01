@@ -11,17 +11,23 @@ TODO: Go through here and make sure terminology is constand
 
 */
 
-// import data from './../data/scrape-2019-02-23.json'
-import bills from './../data/scrape-2019-02-23-bills.json'
-import votes from './../data/scrape-2019-02-23-votes.json'
-import lawmakers from './../data/leg-roster.json'
+import {updateDate, bills, votes, lawmakers} from './../data/scrape-2019-all.json'
+// import bills from './../data/scrape-2019-02-23-bills.json'
+// import votes from './../data/scrape-2019-02-23-votes.json'
+// import lawmakers from './../data/leg-roster-2019.json'
+
+
+
+// import bills from './../data/scrape-2017-bills.json'
+// import votes from './../data/scrape-2017-votes.json'
+
 import { IMPORTANT_ACTIONS, UNIMPORTANT_ACTIONS, BILL_STATUSES } from './config'
 
 import {format} from 'd3'
 
 export const percentFormat = format('.0%')
 export const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)
-
+export const getUpdateDate = () => updateDate
 export const getCommittees = (bill) => {
     return [...new Set(bill.actions.map(d => d.extras.committee))].filter(d => d !== "")
   }
@@ -66,6 +72,8 @@ export const getBillSponsor = bill => {
     return sponsor
 }
 export const getBillLawsUrl = bill => bill.sources[0].url
+export const getBillTextType = bill => bill.versions[0].note.toLowerCase()
+export const getBillTextUrl = bill => bill.versions[0].links[0].url
 
 export const sortByBillNumber = (a,b) => {
     const aType = a.identifier.slice(0,2)
@@ -114,15 +122,9 @@ export const getBillStatus = bill => {
 
 // LAWMAKER HANDLING
 
-// only returns lawmakers who have sponsored bills, names only too
-export const getAllLawmakers = () => {
-    // TODO: hook up more sophisticated date to this,
-    // set this up so it runs once at initializatio (or do preprocessing)
-    // Currently just names
-    // const names = [...new Set(bills.map(bill => getSponsor(bill)).flat())]
-    // return names.map(name => ({name: name}))
-    return lawmakers
-}
+export const getAllLawmakers = () => lawmakers
+export const getSenateLawmakers = () => lawmakers.filter(l => l.chamber === 'senate')
+export const getHouseLawmakers = () => lawmakers.filter(l => l.chamber === 'house')
 export const sortBySponsorshipCounts = (a,b) => getBillsForLawmaker(b).length - getBillsForLawmaker(a).length
 export const sortByDistrict = (a,b) => +a.district.slice(3,) - +b.district.slice(3,)
 
@@ -133,7 +135,7 @@ export const getLawmakerByDistrict = (district) => {
     return lawmakers.find(d => clean(d.district) === clean(district))
 }
 
-export const getLawmakerUrlName = (lawmaker) => lawmaker.name.replace(/\s/g, '')
+export const getLawmakerUrlName = (lawmaker) => lawmaker.name.replace(/\s/g, '-')
 export const getLawmakerByURLName = (urlName) => {
     // const lawmakers = getAllLawmakers()
     const lawmaker = lawmakers.find(d => getLawmakerUrlName(d) === urlName)
@@ -278,21 +280,24 @@ export const lawmakerVoteWithMajority = (vote, lawmaker) => {
 }
 
 // VOTE SUMMARY AGGREGATION FUNCTION
-export const percentVotesWithMajority = (votes, lawmaker) => {
-    const numVotes = votes.length
-    const votesWithMajority = votes.filter(vote => lawmakerVoteWithMajority(vote, lawmaker)).length
-    return percentFormat(votesWithMajority / numVotes)
-}
-export const percentVotesWithGopCaucus = (votes, lawmaker) => {
-    const numVotes = votes.length
-    const votesWithGop = votes.filter(vote => lawmakerVoteWithGopCaucus(vote, lawmaker)).length
-    return percentFormat(votesWithGop / numVotes)
-}
-export const percentVotesWithDemCaucus = (votes, lawmaker) => {
-    const numVotes = votes.length
-    const votesWithDems = votes.filter(vote => lawmakerVoteWithDemCaucus(vote, lawmaker)).length
-    return percentFormat(votesWithDems / numVotes)
-}
+// export const percentVotesWithMajority = (votes, lawmaker) => {
+//     const numVotes = votes.length
+//     const votesWithMajority = votes.filter(vote => lawmakerVoteWithMajority(vote, lawmaker)).length
+//     return percentFormat(votesWithMajority / numVotes)
+// }
+// export const percentVotesWithGopCaucus = (votes, lawmaker) => {
+//     const numVotes = votes.length
+//     const votesWithGop = votes.filter(vote => lawmakerVoteWithGopCaucus(vote, lawmaker)).length
+//     return percentFormat(votesWithGop / numVotes)
+// }
+// export const percentVotesWithDemCaucus = (votes, lawmaker) => {
+//     const numVotes = votes.length
+//     const votesWithDems = votes.filter(vote => lawmakerVoteWithDemCaucus(vote, lawmaker)).length
+//     return percentFormat(votesWithDems / numVotes)
+// }
+export const percentVotesWithMajority = (_, lawmaker) => percentFormat(lawmaker.percentVotesWithMajority)
+export const percentVotesWithGopCaucus = (_, lawmaker) => percentFormat(lawmaker.percentVotesWithGopCaucus)
+export const percentVotesWithDemCaucus = (_, lawmaker) => percentFormat(lawmaker.percentVotesWithDemCaucus)
 
 // export const getLawmakerVote = (vote, name) => {
 //     const laws_vote_name = lawmakers.find(d => d.name === name).laws_vote_name

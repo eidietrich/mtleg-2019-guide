@@ -1,9 +1,3 @@
-/*
-    Component for doing comparative vote visualizations 
-    e.g. compare all 
-
-*/
-
 import React, { Component } from 'react'
 
 import styles from './BillVotesViz.module.css'
@@ -24,8 +18,8 @@ class BillVotesViz extends Component {
                 <div className={styles.dateCol}>Date</div>
                 <div className={styles.descriptionCol}>Action</div>
                 <div className={styles.outcomeCol}>Vote</div>
-                <div className={styles.compareVoteCol}>Republican caucus</div>
-                <div className={styles.compareVoteCol}>Democratic caucus</div>
+                <div className={styles.compareVoteCol}>GOP caucus</div>
+                <div className={styles.compareVoteCol}>Dem. caucus</div>
             </div>
             <div className={styles.rowContainer}>
                 {rows}
@@ -45,7 +39,6 @@ const Vote = (vote, i) => {
 
     const gopVote = gopCaucusVote(vote)
     const demVote = demCaucusVote(vote)
-    console.log(vote)
     return <div key={String(i)}>
         <div className={styles.voteRow}>
             <div className={styles.dateCol}>{vote.start_date} </div>

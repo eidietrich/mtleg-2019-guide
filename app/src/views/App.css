@@ -21,11 +21,11 @@ a:hover {
 :global(.image){
     /* image container div */
     width: 100%;
-    max-height: 400px;
+    height: 200px;
     background-color: #444;
     overflow: hidden;
     object-fit: cover;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
     position: relative;
 }
 
@@ -41,9 +41,12 @@ a:hover {
     background-color: rgba(0.2,0.2,0.2,0.5);
 }
 
-img {
+:global(.image) img {
     width: 100%;
     position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 h1, h2, h3, h4 {
@@ -52,7 +55,7 @@ h1, h2, h3, h4 {
     font-style: normal;
 }
 h1, h2 {
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
 }
 
 hr {
@@ -85,7 +88,8 @@ input {
     line-height: 1.5;
     color: #495057;
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid #666;
+    box-shadow: none;
     /* border-radius: .25rem; */
 }
 
@@ -96,7 +100,7 @@ button {
     white-space: nowrap;
     border: none;
     background-color: #eee;
-    border: 1px solid #ddd;
+    border: 1px solid #666;
     text-transform: uppercase;
     color: #222;
     padding: 0.375rem 0.75rem;

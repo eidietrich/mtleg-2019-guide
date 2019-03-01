@@ -1,4 +1,7 @@
 
+.table {
+    overflow: scroll;
+}
 .description {
     padding: 0.5rem;
 }
@@ -6,7 +9,6 @@
 .header {
     display: flex;
     font-size: 0.8em;
-    /* font-weight: bold; */
 }
 
 .rowsContainer {
@@ -33,7 +35,7 @@
 }
 
 .descriptionCol {
-    flex: 1 0 15rem;
+    flex: 1 1 15rem;
 }
 .dateCol {
     flex: 0 0 6rem;

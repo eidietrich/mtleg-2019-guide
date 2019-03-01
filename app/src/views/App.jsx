@@ -21,22 +21,23 @@ class App extends Component {
       <div className={styles.app}>
         {/* <img class={styles.logo} src={logo} /> */}
         {/* <span className={styles.betaTag}>Beta</span> */}
-          <div className={styles.mtfpLogo}><img className={styles.logo} alt='MTFP logo' src={logo} />| The Montana Free Press</div>
+          <div className={styles.mtfpLogo}><img className={styles.logo} alt='MTFP logo' src={logo} />The Montana Free Press</div>
           <div className={styles.linkContainer}>
-            <Link className={styles.headerLink} to="/">Tracking MTLeg 2019</Link>
-            <Link className={styles.headerLink} to="/lawmakers">✓All Lawmakers</Link>
-            <Link className={styles.headerLink} to="/bills">✓All Bills</Link>
+            <Link className={styles.headerLink} to={`${process.env.PUBLIC_URL}/index.html`}>Tracking MTLeg 2019</Link>
+            <Link className={styles.headerLink} to={`${process.env.PUBLIC_URL}/lawmakers`}>✓All Lawmakers</Link>
+            <Link className={styles.headerLink} to={`${process.env.PUBLIC_URL}/bills`}>✓All Bills</Link>
           </div>
 
         <hr className={styles.rule}/>
 
-        <Route exact path="/" component={Home} />
+        <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
+        <Route exact path={`${process.env.PUBLIC_URL}/index.html`} component={Home} />
 
-        <Route path="/bills" component={AllBillsView} />
-        <Route path="/bill/:id" component={BillByUrl} />
+        <Route path={`${process.env.PUBLIC_URL}/bills`} component={AllBillsView} />
+        <Route path={`${process.env.PUBLIC_URL}/bill/:id`} component={BillByUrl} />
 
-        <Route path="/lawmakers" component={AllLawmakersView} />
-        <Route path="/lawmaker/:name" component={LawmakerByUrl} />
+        <Route path={`${process.env.PUBLIC_URL}/lawmakers`} component={AllLawmakersView} />
+        <Route path={`${process.env.PUBLIC_URL}/lawmaker/:name`} component={LawmakerByUrl} />
 
         {/* <Route path="/votes" component={AllVotesView} /> */}
 
@@ -44,7 +45,7 @@ class App extends Component {
         <br />
         <div className={styles.footer}>See an error or have a suggestion? Email Data Reporter Eric Dietrich at <a href="mailto:edietrich@mtfp.org">edietrich@mtfp.org</a>.</div>
         <br />
-        <div className={styles.mtfpLogo}><img className={styles.logo} alt='MTFP logo' src={logo} />| The Montana Free Press</div>
+        <div className={styles.mtfpLogo}><img className={styles.logo} alt='MTFP logo' src={logo} />The Montana Free Press</div>
       </div>
     </Router>)
   }

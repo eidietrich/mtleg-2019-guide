@@ -3,9 +3,12 @@
 import json
 import glob
 
-out_path_1 = 'data-processed/scrape-2019-02-23.json'
-out_path_app_votes = 'app/src/data/scrape-2019-02-23-votes.json'
-out_path_app_bills = 'app/src/data/scrape-2019-02-23-bills.json'
+in_glob_bills = "_data/mt/bill_*.json"
+in_glob_votes = "_data/mt/vote_event_*.json"
+
+out_path_1 = 'data-processed/scrape-2017.json'
+out_path_app_votes = 'app/src/data/scrape-2017-votes.json'
+out_path_app_bills = 'app/src/data/scrape-2017-bills.json'
 
 # Utility functions
 def get_js(path):
@@ -18,8 +21,8 @@ def write_js(path, data):
       json.dump(data, f, ensure_ascii=False, indent=4)
     
 def main():
-    bill_files = glob.glob("_data/mt/bill_*.json")
-    vote_files = glob.glob("_data/mt/vote_event_*.json")
+    bill_files = glob.glob(in_glob_bills)
+    vote_files = glob.glob(in_glob_votes)
 
     bills = [get_js(file) for file in bill_files]
     votes = [get_js(file) for file in vote_files]

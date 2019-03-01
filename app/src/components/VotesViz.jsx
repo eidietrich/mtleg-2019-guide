@@ -17,7 +17,7 @@ class VotesViz extends Component {
                 <div className={styles.billTitleCol}>Title</div>
                 <div className={styles.outcomeCol}>2nd Reading (Yes-No)</div>
                 <div className={styles.compareVoteCol}>GOP caucus</div>
-                <div className={styles.compareVoteCol}>Dem caucus</div>
+                <div className={styles.compareVoteCol}>Dem. caucus</div>
                 <div className={styles.dateCol}>Vote date</div>
             </div>
             <div className={styles.rowContainer}>
@@ -41,7 +41,7 @@ const Vote = (vote, i) => {
     return <div key={String(i)}>
         <div className={styles.voteRow}>
             <div className={styles.billCol}>
-                <Link to={`/bill/${getBillURLId(bill)}`}>{bill.identifier}</Link>
+                <Link to={`${process.env.PUBLIC_URL}/bill/${getBillURLId(bill)}`}>{bill.identifier}</Link>
             </div>
             
             <div className={styles.billTitleCol}>{bill.title}</div>

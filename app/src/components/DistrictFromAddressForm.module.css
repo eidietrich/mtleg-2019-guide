@@ -1,11 +1,13 @@
 .addressForm {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 1rem;
 }
 .textInput {
     /* color: red; */
     /* min-width: 20rem; */
     flex: 4 1 15rem;
+    height: 2em;
 }
 .searchButton {
     flex: 1 1 auto;
