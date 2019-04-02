@@ -92,6 +92,7 @@ const checkBillTypeCategorization = (bills) => {
 const checkVoterNamesMatch = (votes, lawmakers) => {
     
     const lawmakerNames = lawmakers.map(d => d.laws_vote_name)
+    // console.log('lawmakerNames', lawmakerNames)
     let unmatchedVoteNames = votes.reduce((array, vote) => {
         const voterNames = vote.votes.map(d => d.voter_name)
         const unmatchedVoteNames = voterNames
