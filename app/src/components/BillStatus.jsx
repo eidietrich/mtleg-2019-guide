@@ -10,7 +10,7 @@ const BillStatus = (props) => {
     
     return <div className={styles.statusIndicator}
             style={{backgroundColor: billStatus.color}}>
-        {billStatus.key}
+        {billStatus.label}
     </div>
 }
 

@@ -9,15 +9,15 @@ const moment = require('moment')
 
 const { runTests, processing } = require('./processing/data-processing.js')
 
-// const GLOB_BILLS = "_data/mt-02-23-2019/bill_*.json"
-// const GLOB_VOTES = "_data/mt-02-23-2019/vote_event_*.json"
+const GLOB_BILLS = "_data/mt/bill_*.json"
+const GLOB_VOTES = "_data/mt/vote_event_*.json"
+// const GLOB_BILLS = "_data/mt-2017/bill_*.json"
+// const GLOB_VOTES = "_data/mt-2017/vote_event_*.json"
 
-const GLOB_BILLS = "_data/mt-02-23-2019/bill_*.json"
-const GLOB_VOTES = "_data/mt-02-23-2019/vote_event_*.json"
-
-const OUT_PATH_APP_VOTES = 'app/src/data/scrape-2019-votes.json'
-const OUT_PATH_APP_BILLS = 'app/src/data/scrape-2019-bills.json'
-const OUT_PATH_APP = 'app/src/data/scrape-2019-all.json'
+// const OUT_PATH_APP_VOTES = 'app/src/data/scrape-2019-votes.json'
+// const OUT_PATH_APP_BILLS = 'app/src/data/scrape-2019-bills.json'
+const OUT_PATH_LAWMAKERS = './analysis/lawmakers-2019.json'
+const OUT_PATH_APP = 'app/src/data/mtleg-2019.json'
 
 // Utility functions
 const getJson = (path) => JSON.parse(fs.readFileSync(path))
@@ -38,17 +38,21 @@ function main(){
     const bills = bill_files.map(getJson)
     const votes = vote_files.map(getJson)
     const lawmakers = getJson('./app/src/data/leg-roster-2019.json')
+    // const lawmakers = getJson('./processing/leg-roster-2017.json')
 
     // Processing
     // console.log(configs)
-
-    runTests(bills, votes)
+ 
     processing(bills, votes, lawmakers)
+    runTests(bills, votes, lawmakers)
 
     writeJson(OUT_PATH_APP, {
         updateDate: moment().format('YYYY-MM-DD'),
         votes: votes,
         bills: bills,
+        lawmakers: lawmakers,
+    })
+    writeJson(OUT_PATH_LAWMAKERS, {
         lawmakers: lawmakers,
     })
     // writeJson(OUT_PATH_APP_VOTES, votes)

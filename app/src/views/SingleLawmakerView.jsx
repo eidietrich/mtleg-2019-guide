@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import BillsProcessViz from '../components/BillsProcessViz'
 import LawmakerVotesViz from '../components/LawmakerVotesViz'
@@ -20,6 +21,11 @@ class LawmakerView extends Component {
     }
     render() {
         const lawmaker = this.props.lawmaker
+        if (!lawmaker) return (<div>
+            <p>No legislator here.</p>
+            <p><Link className={styles.headerLink} to={`/lawmakers`}>See all legislators</Link>.</p>
+        </div>)
+        
         const votes = getSecondReadingVotesForLawmaker(lawmaker)
             .sort(this.state.voteSort)
             
@@ -36,7 +42,7 @@ class LawmakerView extends Component {
             <div className={styles.label}>Second readings on {cap(lawmaker.chamber)} floor</div>
             <LawmakerVotesSummary lawmaker={lawmaker} votes={votes} />
             <div className={styles.note}>
-                <p>Statistics calculated for second reading floor votes only. The majority vote percent figure indicates how often the lawmaker has voted with at least half their fellow lawmakers in both parties. Party vote statistics indicate how often the lawmaker has voted with a majority of members in that party's caucus.</p>
+                <p>Statistics calculated for second reading floor votes only. The majority vote percentage figure indicates how often the lawmaker has voted with at least half their fellow lawmakers in both parties. Party vote statistics indicate how often the lawmaker has voted with a majority of members in that party's caucus.</p>
             </div>
             <ButtonBar
                 buttons={[

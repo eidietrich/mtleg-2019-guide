@@ -9,6 +9,10 @@ import ButtonBar from './../components/ButtonBar'
 
 import {getAllBills, getFloorVotes, getHouseLawmakers, getSenateLawmakers, getUpdateDate} from './../js/handling.js'
 
+import {format} from 'd3'
+
+const fNum = format(',')
+
 const chambers = [
     {
         chamber: 'Montana House',
@@ -32,7 +36,7 @@ class Home extends Component {
             <h1>NEWS APP: Tracking the 2019 Montana Legislature</h1>
             <div className='image'>
                 <img src={image} alt=''/>
-                <div className="image-credit">Photo by Eliza Wiley</div>
+                <div className="image-credit">Photo by John S. Adams</div>
             </div>
             <div className="article" >
                 <div className={styles.byline}>
@@ -40,18 +44,20 @@ class Home extends Component {
                 </div>
                 <div className={styles.update}>Last updated {getUpdateDate()}</div>
 
-                <p>As Montanans, we have constitutionally guaranteed <a href="https://leg.mt.gov/bills/mca/CONSTITUTION/II/9.htm">a right to know what our government is up to</a>. But with <span className={styles.number}>{getAllBills().length} bills</span> introduced before the Montana Legislature’s 2019 session and <span className={styles.number}>{getFloorVotes().length} votes</span> recorded as lawmakers debate them, there’s enough going on in the Capitol it’s tricky for anyone who can't follow things full-time to keep up with what exactly the the Legislative Branch is doing.</p>
+                <p>As Montanans, we have a constitutionally guaranteed <a href="https://leg.mt.gov/bills/mca/CONSTITUTION/II/9.htm"> right to know what our government is up to</a>. But with <span className={styles.number}>{fNum(getAllBills().length)} bills</span> introduced in the Montana Legislature’s 2019 session and <span className={styles.number}>{fNum(getFloorVotes().length)} votes</span> recorded as lawmakers debate them, there’s enough going on in the Capitol that it’s tricky for anyone who can't follow things full-time to keep up.</p>
 
-                <p>This Montana Free Press news app aims to help our readers there, tabulating data from the state <a href='http://laws.leg.mt.gov/legprd/law0203w$.startup?P_SESS=20191'>LAWS system</a> that we’ve collected using code adapted from the <a href="https://openstates.org/">OpenStates</a> project. Note this is currently a beta product, meaning that we think it's far enough along to be useful but may not have worked out all the bugs.</p>
+                <p>This Montana Free Press news app aims to help our readers stay on top of the legislative action, tabulating data from the state <a href='http://laws.leg.mt.gov/legprd/law0203w$.startup?P_SESS=20191'>LAWS system</a> that we’ve collected using code adapted from the <a href="https://openstates.org/">OpenStates</a> project. Note that this is currently a beta product, meaning that we think it's far enough along to be useful but  acknowledge that it may still have some bugs to work out.</p>
 
-                <p>We have plans to add more features here going forward (especially if readers like you tell us this is useful) but for the time being here’s what this project lets you do:</p>
+                <p>We plan to add more features to the app going forward (especially if readers like you tell us this is useful) but for the time being here’s what this project lets you do:</p>
 
                 <ul className={styles.linksContainer}>
-                    <li>See what bills specific lawmakers (e.g., <Link to={`${process.env.PUBLIC_URL}/lawmaker/Greg-Hertz/`}>Speaker of the House Greg Hertz</Link>) have sponsored and how they’ve voted in their respective chambers</li>
-                    <li>Look up your representatives <Link to={`${process.env.PUBLIC_URL}/lawmakers`}>by your home or business address</Link></li>
-                    <li>See the key actions and votes taken on individual bills (e.g., <Link to={`${process.env.PUBLIC_URL}/bill/hb1`}>House Bill 1</Link>)</li>
-                    <li>See <Link to={`${process.env.PUBLIC_URL}/bills`}>the status of introduced bills</Link></li>
+                    <li>See what bills specific lawmakers have sponsored and how they’ve voted in their respective chambers (e.g., <Link to={`/lawmaker/Greg-Hertz/`}>Speaker of the House Greg Hertz</Link>)</li> 
+                    <li>Look up your representatives <Link to={`/lawmakers`}>by your home or business address</Link></li>
+                    <li>See the key actions and votes taken on individual bills (e.g., <Link to={`/bill/hb1`}>House Bill 1</Link>)</li>
+                    <li>See <Link to={`/bills`}>the status of introduced bills</Link></li>
                 </ul>
+
+                <p>Have feedback here? We'd love to hear it &mdash; drop a line to Data Reporter Eric Dietrich at <a href="mailto:edietrich@mtfp.org">edietrich@mtfp.org</a>.</p>
 
             </div>
             <h2>Legislative summary</h2>

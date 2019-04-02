@@ -1,3 +1,13 @@
+# MT Voting app
+Adapted from OpenStates Montana scrapers https://github.com/openstates/openstates
+
+Run MT scrape: 
+```
+docker-compose run --rm scrape mt bills --scrape
+```
+
+----
+
 The Open States Project collects and makes available data about state legislative activities, including bill summaries, votes, sponsorships and state legislator information. This data is gathered directly from the states and made available in a common format for interested developers, through a JSON API and data dumps.
 
 Links

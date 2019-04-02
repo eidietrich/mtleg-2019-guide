@@ -11,7 +11,7 @@ TODO: Go through here and make sure terminology is constand
 
 */
 
-import {updateDate, bills, votes, lawmakers} from './../data/scrape-2019-all.json'
+import {updateDate, bills, votes, lawmakers} from './../data/mtleg-2019.json'
 // import bills from './../data/scrape-2019-02-23-bills.json'
 // import votes from './../data/scrape-2019-02-23-votes.json'
 // import lawmakers from './../data/leg-roster-2019.json'
@@ -112,11 +112,17 @@ export const getActionGlyph = action => {
 
 export const getLastBillAction = bill => getImportantActions(bill).slice(-1)[0].description
 
+// old
+// export const getBillStatus = bill => {
+//     const lastAction = IMPORTANT_ACTIONS.find(d => d.key === getLastBillAction(bill))
+//     if (!lastAction) console.log('No match for ' + getLastBillAction(bill))
+//     const status = BILL_STATUSES.find(d => d.key === lastAction.status)
+//     if (!status) console.log('No match for ' + lastAction.status)
+//     return status
+// }
 export const getBillStatus = bill => {
-    const lastAction = IMPORTANT_ACTIONS.find(d => d.key === getLastBillAction(bill))
-    if (!lastAction) console.log('No match for ' + getLastBillAction(bill))
-    const status = BILL_STATUSES.find(d => d.key === lastAction.status)
-    if (!status) console.log('No match for ' + lastAction.status)
+    const statusKey = bill.extras.status
+    const status = BILL_STATUSES.find(d => d.key === statusKey)
     return status
 }
 
@@ -174,7 +180,9 @@ export const getMajorFloorVotes = () => {
 
 export const getSecondReadingVotes = () => {
     const include = ['2nd Reading Passed','2nd Reading Concurred', '2nd Reading Not Passed',
-    '2nd Reading Not Concurred', '2nd Reading Passed as Amended', ]
+    '2nd Reading Not Concurred', '2nd Reading Concurred as Amended', '2nd Reading Passed as Amended', '2nd Reading Not Passed as Amended',
+    '2nd Reading Pass Motion Failed', '2nd Reading Concur Motion Failed',
+ ]
     return getFloorVotes().filter(vote => include.includes(vote.bill_action))
 }
     

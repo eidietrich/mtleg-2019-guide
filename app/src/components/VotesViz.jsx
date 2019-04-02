@@ -41,7 +41,7 @@ const Vote = (vote, i) => {
     return <div key={String(i)}>
         <div className={styles.voteRow}>
             <div className={styles.billCol}>
-                <Link to={`${process.env.PUBLIC_URL}/bill/${getBillURLId(bill)}`}>{bill.identifier}</Link>
+                <Link to={`/bill/${getBillURLId(bill)}`}>{bill.identifier}</Link>
             </div>
             
             <div className={styles.billTitleCol}>{bill.title}</div>

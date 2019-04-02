@@ -24,6 +24,9 @@ class BillVotesViz extends Component {
             <div className={styles.rowContainer}>
                 {rows}
             </div>
+            <div className={styles.note}>
+                <p>Note: Coloring in the vote outcome column does not currently account for votes that require more than a simple majority to pass. Putting a constitutional amendment before voters, for example, takes approval from two-thirds of lawmakers across both houses. Additionally, bills that authorize state debt must pass with two-thirds supermajorities in each legislative chamber.</p>
+            </div>
         </div>);
     }
   }

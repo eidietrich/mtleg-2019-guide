@@ -11,3 +11,8 @@
 .billText {
     margin-bottom: 1rem;
 }
+
+.note {
+    font-style: italic;
+    font-size: 0.8em;
+}

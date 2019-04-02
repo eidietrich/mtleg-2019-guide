@@ -56,7 +56,7 @@ const Column = (props) => {
 const Lawmaker = (laws_vote_name) => {
     const lawmaker = getLawmakerByVoteName(laws_vote_name)
     return <div key={lawmaker.laws_vote_name}>
-        <Link to={`${process.env.PUBLIC_URL}/lawmaker/${getLawmakerUrlName(lawmaker)}`}>{lawmaker.name}</Link>
+        <Link to={`/lawmaker/${getLawmakerUrlName(lawmaker)}`}>{lawmaker.name}</Link>
     </div>
 }
 

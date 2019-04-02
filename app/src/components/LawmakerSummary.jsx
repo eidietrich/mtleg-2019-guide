@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+// import { HashRouter as Link} from "react-router-dom"
 import { Link } from 'react-router-dom'
 
 import styles from './LawmakerSummary.module.css';
 
-import { getBillsForLawmaker, getLawmakerUrlName, getSecondReadingVotesForLawmaker, sortByDistrict,
-    percentVotesWithMajority, percentVotesWithGopCaucus, percentVotesWithDemCaucus, percentFormat
+import { getBillsForLawmaker, getLawmakerUrlName, sortByDistrict,
+    percentVotesWithMajority, percentVotesWithGopCaucus, percentVotesWithDemCaucus,
  } from './../js/handling'
 
 class LawmakerSummary extends Component {
@@ -37,11 +38,10 @@ const Row = (lawmaker, i) => {
     const gopVotes = percentVotesWithGopCaucus('', lawmaker)
     const demVotes = percentVotesWithDemCaucus('', lawmaker)
     
-    const bgColor = (lawmaker.party === 'R') ? '#f4a582' : '#92c5de'
     const color = (lawmaker.party === 'R') ? '#b2182b' : '#2166ac'
 
     return (<Link
-        to={`${process.env.PUBLIC_URL}/lawmaker/${url}`}
+        to={`/lawmaker/${url}`}
         key={String(i)}
         className={styles.row}
         style={{color: color}}>

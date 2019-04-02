@@ -1,13 +1,77 @@
 // Needs to be commonJs not ES5 module format b/c node script references it
 
 module.exports.BILL_STATUSES = [
-  {key: 'Pending', color: '#ffffbf'},
-  {key: 'Tabled', color: '#fc8d59'},
-  {key: 'Probably Dead', color: '#fc8d59'},
-  {key: 'Passed', color: '#91cf60'},
-  {key: 'Vetoed', color: '#fc8d59'},
-  {key: 'Died in Process', color: '#fc8d59'},
-  {key: 'Died in Committee', color: '#fc8d59'},
+  
+  {key: 'In First House--Introduced', label: 'Introduced', color: '#ffffbf'},
+  {key: 'In First House Committee--Nontabled', label: 'In first committee', color: '#ffffbf'},
+  
+  {key: 'In First House--Out of Committee', label: 'Thru first committee', color: '#ffffbf'},
+  {key: 'In First House--Through 2nd Reading', label: 'Passed first chamber', color: '#ffffbf'},
+  {key: 'Transmitted to Second House', label: 'Passed first chamber', color: '#ffffbf'},
+  {key: 'In Second House Committee--Nontabled', label: 'Passed first chamber', color: '#ffffbf'},
+  {key: 'In Second House--Out of Committee', label: 'Passed first chamber', color: '#ffffbf'},
+
+  {key: 'Returned to First House with Second House Amendments', label: 'Passed both chambers', color: '#ffffbf'},
+  {key: 'In Second House--Through 2nd Reading', label: 'Passed both chambers', color: '#ffffbf'},
+  {key: 'In Second House--Through 3rd Reading', label: 'Passed both chambers', color: '#ffffbf'},
+
+  {key: 'Passed By Legislature--Enrolling and Final Preparation Process', label: 'Passed both chambers', color: '#ffffbf'},
+  {key: 'In Process to Consider Second House Amendments', label: 'Passed both chambers', color: '#ffffbf'},
+  {key: 'In Conference or Free Conference Committee Process', label: 'Passed both chambers', color: '#ffffbf'},
+  {key: 'Transmitted to Governor', label: 'Passed both chambers', color: '#ffffbf'},
+
+  {key: 'Returned With Governor\'s Proposed Amendments or Line Item Veto', label: 'Passed both chambers', color: '#ffffbf'},
+  {key: 'In Process to Consider Governor\'s Proposed Amendments or Line Item Veto', label: 'Passed both chambers', color: '#ffffbf'},
+
+  {key: 'In First House Committee--Tabled', label: 'Tabled', color: '#fc8d59'},
+  {key: 'In Second House Committee--Tabled', label: 'Tabled', color: '#fc8d59'},
+  {key: 'Probably Dead', label: 'Probably Dead', color: '#fc8d59'},
+
+  {key: 'Became Law', label: 'Became Law', color: '#91cf60'},
+]
+
+module.exports.LEG_NAME_CLEANING = {
+  // for cleaning inconsistent names in LAWS votes records
+  'Tempel, Russel (Russ)' : 'Tempel, Russel',
+  'Tempel, Russel ': 'Tempel, Russel',
+  'McClafferty, Edith (Edie)' : 'McClafferty, Edith',
+  'McClafferty, Edith ': 'McClafferty, Edith',
+  'Lenz, Dennis R.' : 'Lenz, Dennis',
+  'Morigeau, Shane A.' : 'Morigeau, Shane',
+  'Kary, Douglas (Doug)' : 'Kary, Douglas',
+  'Kary, Douglas ': 'Kary, Douglas',
+  'Salomon, Daniel R.' : 'Salomon, Daniel',
+  'Sesso, Jon C.' : 'Sesso, Jon',
+  'Welborn, Jeffrey W.' : 'Welborn, Jeffrey',
+  'MacDonald, Margaret (Margie)' : 'MacDonald, Margaret',
+  'MacDonald, Margaret  ': 'MacDonald, Margaret',
+  'Harvey, Derek J.' : 'Harvey, Derek',
+  'Krautter, Joel G.' : 'Krautter, Joel',
+  'Loge, Denley M.' : 'Loge, Denley',
+  'Runningwolf, Tyson T.' : 'Runningwolf, Tyson',
+  'Shaw, Ray L.' : 'Shaw, Ray',
+  'Small, Jason D.' : 'Small, Jason',
+  'Holmlund, Kenneth L.' : 'Holmlund, Kenneth',
+  'Moore, Frederick (Eric)' : 'Moore, Frederick',
+  'Moore, Frederick ': 'Moore, Frederick',
+  'Fitzgerald, Ross H.' : 'Fitzgerald, Ross',
+  'Ellsworth, Jason W.' : 'Ellsworth, Jason',
+  'Galloway, Lola' : 'Sheldon-Galloway, Lola',
+
+  // for 2017
+  'Stewart Peregoy, Sharon': 'Stewart-Peregoy, Sharon',
+  'Kipp, George G.': 'Kipp, George',
+  'Jones, Donald W.': 'Jones, Donald',
+  'Knokey, Jon A.': 'Knokey, Jon',
+}
+
+
+// subjects includes keys for vote requirements
+// NOT IMPLEMENTED
+module.exports.BILL_SUBJECTS = [
+  {key: 'Constitutional Amendment Proposals', voteThresholdDescription: '2/3 of entire legislature', voteThreshold: 0.667},
+  {key: 'Debt, Creation of State', voteThresholdDescription: '2/3 of each house', voteThreshold: 0.667},
+  // non-exhaustive
 ]
   
 module.exports.IMPORTANT_ACTIONS = [
@@ -38,6 +102,9 @@ module.exports.IMPORTANT_ACTIONS = [
   {key: 'Bill Withdrawn per House Rule H30-50(3)(b)', color: '#fc8d59', glyph: '✗Spn', status: 'Probably Dead',},
   {key: 'Committee Executive Action--Bill Not Passed', color: '#fc8d59', glyph: '✗Cmt', status: 'Probably Dead',},
   
+  // blasting
+  {key: 'Taken from Committee; Placed on 2nd Reading', color: '#ffffbf',  glyph: '↑Floor', status: '',},
+
   // NON-COMMITTEE
   // Procedural
   {key: 'Transmitted to Senate', color: '#66c2a5', glyph: '→Sen', status: 'Pending',},
@@ -139,7 +206,8 @@ module.exports.IMPORTANT_ACTIONS = [
   {key: '2nd Reading House Amendments Not Concurred', color: '#ffffbf', glyph: '', status: '',},
   {key: '2nd Reading Indefinitely Postpone Motion Failed', color: '#ffffbf', glyph: '', status: '',},
   {key: '2nd Reading Not Concurred as Amended', color: '#ffffbf', glyph: '', status: '',},
-  {key: 'Taken from Committee; Placed on 2nd Reading', color: '#ffffbf',  glyph: '', status: '',},
+  {key: 'Segregated from Committee of the Whole Report', color: '#ffffbf', glyph: '', status: '',},
+  
   {key: 'Taken from 3rd Reading; Placed on 2nd Reading', color: '#ffffbf',  glyph: '', status: '',},
   {key: 'Reconsidered Previous Action; Remains in 3rd Reading Process', color: '#ffffbf', glyph: '', status: '',},
   {key: 'Taken from 2nd Reading; Rereferred to Committee', color: '#ffffbf', glyph: '', status: '',},

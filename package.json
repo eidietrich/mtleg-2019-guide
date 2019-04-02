@@ -1,0 +1,28 @@
+{
+  "name": "mtleg-vote-tracker",
+  "version": "1.0.0",
+  "description": "Scrape data from openstates and track mtleg votes",
+  "main": "index.js",
+  "dependencies": {
+    "esm": "^3.2.7",
+    "glob": "^7.1.3",
+    "moment": "^2.24.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "scrape": "docker-compose run --rm scrape mt bills --scrape",
+    "parse": "node scrape-parsing.js",
+    "build": "cd app; npm run build; cd ..",
+    "upload": "cd app; lftp -c \"open sftp://ericdietrich@sftp.flywheelsites.com/mtfpeditor/montana-free-press/apps; mirror -eR track-mtleg-2019/\"; cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eidietrich/openstates.git"
+  },
+  "author": "Eric Dietrich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eidietrich/openstates/issues"
+  },
+  "homepage": "https://github.com/eidietrich/openstates#readme"
+}

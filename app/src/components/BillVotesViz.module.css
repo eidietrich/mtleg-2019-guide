@@ -68,3 +68,8 @@
     font-weight: bold;
     text-transform: uppercase;
 }
+
+.note {
+    font-style: italic;
+    font-size: 0.8em;
+}

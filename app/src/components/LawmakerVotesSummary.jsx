@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import styles from './LawmakerVotesSummary.module.css'
 
 import {
-    cap, percentVotesWithMajority, percentVotesWithGopCaucus, percentVotesWithDemCaucus
+    percentVotesWithMajority, percentVotesWithGopCaucus, percentVotesWithDemCaucus
 } from './../js/handling'
 
 class LawmakerVotesSummary extends Component {

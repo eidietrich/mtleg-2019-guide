@@ -2,7 +2,7 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://www.montanafreepress.org/apps/bill-app-test",
+  "homepage": "http://www.montanafreepress.org/apps/track-mtleg-2019",
   "dependencies": {
     "d3": "^5.9.1",
     "d3-format": "^1.3.2",
@@ -10,13 +10,14 @@
     "pym.js": "^1.3.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-ga": "^2.5.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",
     "react-table": "^6.9.2"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -r ./bill-app-test && react-scripts build && mv ./build ./bill-app-test",
+    "build": "rm -r ./track-mtleg-2019 && react-scripts --max_old_space_size=4096 build && mv ./build ./track-mtleg-2019",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

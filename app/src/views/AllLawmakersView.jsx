@@ -101,7 +101,7 @@ const Lawmaker = (lawmaker, i) => {
     const url = getLawmakerUrlName(lawmaker)
     const bills = getBillsForLawmaker(lawmaker)
     const plural = (l) => (l.length === 1) ? '' : 's'
-    return <Link to={`${process.env.PUBLIC_URL}/lawmaker/${url}`} key={String(i)} className={styles.lawmaker}>
+    return <Link to={`/lawmaker/${url}`} key={String(i)} className={styles.lawmaker}>
         <div className={styles.district}>{lawmaker.district}</div>
         <div className={styles.name}>{title} {lawmaker.name}</div>
         <div className={styles.locale}>{lawmaker.party}-{lawmaker.city}</div>

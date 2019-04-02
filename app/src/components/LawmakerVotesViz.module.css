@@ -92,3 +92,8 @@
     border: 1px solid #222;
     font-weight: bold;
 }
+
+.note {
+    font-style: italic;
+    font-size: 0.8em;
+}
