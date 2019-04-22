@@ -3,7 +3,7 @@
 // Hacky pathing
 var { BILL_STATUSES, IMPORTANT_ACTIONS, UNIMPORTANT_ACTIONS,
     LEG_NAME_CLEANING,
- } = require('./../app/src/js/config.js')
+ } = require('../app/src/js/config.js')
 var { 
     getUniqueActions, getUniqueStatuses, getUniqueCategories, getUniqueSubjects,
     getSecondReadingVotesForLawmaker,

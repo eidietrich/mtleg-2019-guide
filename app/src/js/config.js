@@ -207,6 +207,8 @@ module.exports.IMPORTANT_ACTIONS = [
   {key: '2nd Reading Indefinitely Postpone Motion Failed', color: '#ffffbf', glyph: '', status: '',},
   {key: '2nd Reading Not Concurred as Amended', color: '#ffffbf', glyph: '', status: '',},
   {key: 'Segregated from Committee of the Whole Report', color: '#ffffbf', glyph: '', status: '',},
+  {key: '2nd Reading Concur as Amended Motion Failed', color: '#ffffbf', glyph: '', status: '',},
+  {key: 'Reconsidered Previous Action; Remains in Committee', color: '#ffffbf', glyph: '', status: '',},
   
   {key: 'Taken from 3rd Reading; Placed on 2nd Reading', color: '#ffffbf',  glyph: '', status: '',},
   {key: 'Reconsidered Previous Action; Remains in 3rd Reading Process', color: '#ffffbf', glyph: '', status: '',},

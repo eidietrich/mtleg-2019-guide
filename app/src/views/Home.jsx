@@ -6,6 +6,7 @@ import styles from './Home.module.css'
 
 import LawmakerSummary from './../components/LawmakerSummary'
 import ButtonBar from './../components/ButtonBar'
+import EmailForm from './../components/EmailForm'
 
 import {getAllBills, getFloorVotes, getHouseLawmakers, getSenateLawmakers, getUpdateDate} from './../js/handling.js'
 
@@ -60,6 +61,7 @@ class Home extends Component {
                 <p>Have feedback here? We'd love to hear it &mdash; drop a line to Data Reporter Eric Dietrich at <a href="mailto:edietrich@mtfp.org">edietrich@mtfp.org</a>.</p>
 
             </div>
+            <div>this is</div>
             <h2>Legislative summary</h2>
             <div>
                 <ButtonBar
