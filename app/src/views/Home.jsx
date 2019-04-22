@@ -59,9 +59,9 @@ class Home extends Component {
                 </ul>
 
                 <p>Have feedback here? We'd love to hear it &mdash; drop a line to Data Reporter Eric Dietrich at <a href="mailto:edietrich@mtfp.org">edietrich@mtfp.org</a>.</p>
-
+                <EmailForm />
             </div>
-            <div>this is</div>
+            
             <h2>Legislative summary</h2>
             <div>
                 <ButtonBar

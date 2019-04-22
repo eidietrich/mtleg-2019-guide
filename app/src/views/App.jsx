@@ -14,6 +14,8 @@ import AllBillsView from './AllBillsView'
 // import AllVotesView from './AllVotesView'
 import AllLawmakersView from './AllLawmakersView'
 
+import EmailForm from './../components/EmailForm'
+
 import { getLawmakerByURLName, getBillByURLId } from '../js/handling'
 
 // Analytics
@@ -72,10 +74,12 @@ class App extends Component {
             <p>As a nonprofit news site, we rely on reader support to make projects like this possible.</p>
             <p>You can donate <a href="https://www.montanafreepress.org/donate/">here</a>.</p>
             <br />
+            <EmailForm />
             <div className={styles.mtfpLogo}>
               <a href="https://montanafreepress.org">
                 <img className={styles.logo} alt='MTFP logo' src={logo} />
-              </a>The Montana Free Press
+              </a>
+              The Montana Free Press 
             </div>
           </div>
         </div>
