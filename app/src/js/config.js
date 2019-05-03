@@ -201,6 +201,7 @@ module.exports.IMPORTANT_ACTIONS = [
   // TODO: procedural stuff to sort out
   {key: '2nd Reading Conference Committee Report Adopt Motion Failed', color: '#ffffbf', glyph: '', status: '',},
   {key: '3rd Reading Not Passed as Amended by Senate', color: '#ffffbf', glyph: '', status: '',},
+  {key: '3rd Reading Conference Committee Report Rejected', color: '#ffffbf', glyph: '', status: '',},
   {key: '2nd Reading House Amendments Concur Motion Failed', color: '#ffffbf', glyph: '', status: '',},
   {key: '2nd Reading House Amendments Concurred on Voice Vote', color: '#ffffbf', glyph: '', status: '',},
   {key: '2nd Reading House Amendments Not Concurred', color: '#ffffbf', glyph: '', status: '',},
@@ -209,7 +210,7 @@ module.exports.IMPORTANT_ACTIONS = [
   {key: 'Segregated from Committee of the Whole Report', color: '#ffffbf', glyph: '', status: '',},
   {key: '2nd Reading Concur as Amended Motion Failed', color: '#ffffbf', glyph: '', status: '',},
   {key: 'Reconsidered Previous Action; Remains in Committee', color: '#ffffbf', glyph: '', status: '',},
-  
+  {key: 'Free Conference Committee Dissolved', color: '#ffffbf', glyph: '', status: '',},
   {key: 'Taken from 3rd Reading; Placed on 2nd Reading', color: '#ffffbf',  glyph: '', status: '',},
   {key: 'Reconsidered Previous Action; Remains in 3rd Reading Process', color: '#ffffbf', glyph: '', status: '',},
   {key: 'Taken from 2nd Reading; Rereferred to Committee', color: '#ffffbf', glyph: '', status: '',},

@@ -11,6 +11,8 @@ const moment = require('moment')
 
 const IN_PATH = './analysis/bills-2019.json'
 const OUT_PATH = './analysis/bills-2019-cleaned.json'
+const FILTERED_OUT_PATH = './analysis/filtered-bills-2019-cleaned.json'
+
 
 // Utility functions
 const getJson = (path) => JSON.parse(fs.readFileSync(path))
@@ -93,6 +95,11 @@ function main(){
         date: raw.date,
         bills: bills,
         lawmakers: lawmakers,
+    })
+
+    const incBills = ["HB 658", "HB 661", "HB 694", "SB 338", "HB 652", "HB 318", "HB 575", "HB 302", "SB 217", "HB 332", "HB 290", "HB 553", "HB 159", "HB 21", "HB 175", "HB 293", "SB 266", "HB 2", "HB 219", "SB 331"]
+    writeJson(FILTERED_OUT_PATH, {
+        bills: bills.filter(b => incBills.includes(b.identifier)),
     })
 }
   
