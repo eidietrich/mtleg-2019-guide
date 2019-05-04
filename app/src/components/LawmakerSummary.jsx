@@ -8,68 +8,67 @@ import { getBillsForLawmaker, getLawmakerUrlName,
     percentVotesWithMajority, percentVotesWithGopCaucus, percentVotesWithDemCaucus,
  } from './../js/handling'
 
-const sortFunctions = [ 
-    {key: 'byName', function: sortByLawmakerName},
-    {key: 'byDistrict', function: sortByDistrict},
-    {key: 'byMajorityVote', function: sortByLawmakerValue('percentVotesWithMajority')},
-    {key: 'byGopVote', function: sortByLawmakerValue('percentVotesWithGopCaucus')},
-    {key: 'byDemVote', function: sortByLawmakerValue('percentVotesWithDemCaucus')},
-]
-
 const columns = [
     {
+        key: 'name',
         header: 'Lawmaker',
         content: d => `${d.name} (${d.party})`,
-        sortKey: 'byName',
         style: styles.nameCol,
+        sortFunction: sortByLawmakerName
     },
-    
     {
+        key: 'district',
         header: 'District',
         content: d => `${d.district} / ${d.city}`,
-        sortKey: 'byDistrict',
         style: styles.districtCol,
+        sortFunction: sortByDistrict,
     },
     {
+        key: 'bills',
         header: 'Bills',
         content: d => getBillsForLawmaker(d).length,
-        sortKey: null,
+        
         style: styles.billNumCol,
+        sortFunction: null,
     },
     {
+        key: 'majorityVote',
         header: 'Votes with majority of body',
         content: d => percentVotesWithMajority('', d),
-        sortKey: 'byMajorityVote',
         style: styles.votePercentCol,
+        sortFunction: sortByLawmakerValue('percentVotesWithMajority'),
     },
     {
+        key: 'gopVote',
         header: 'Votes with GOP caucus',
         content: d => percentVotesWithGopCaucus('', d),
-        sortKey: 'byGopVote',
         style: styles.votePercentCol,
+        sortFunction: sortByLawmakerValue('percentVotesWithGopCaucus'),
     },
     {
+        key: 'demVote',
         header: 'Votes with Dem. caucus',
         content: d => percentVotesWithDemCaucus('', d),
-        sortKey: 'byDemVote',
         style: styles.votePercentCol,
+        sortFunction: sortByLawmakerValue('percentVotesWithDemCaucus'),
     },
 ]
 
-class LawmakerSummary extends Component {
+class Table extends Component {
     constructor(props){
         super(props)
         this.state = {
-            sort: sortFunctions[0],
+            sortColumn: columns[0],
             ascending: true,
         }
-        this.handleSort = this.handleSort.bind(this)
+        this.makeSortHandler = this.makeSortHandler.bind(this)
     }
 
-    handleSort(colKey){
+    makeSortHandler(column){
+        if (column.sortFunction === null) return null // catches null sort function
         return () => {
             this.setState({
-                sort: sortFunctions.find(d => d.key === colKey),
+                sortColumn: column,
                 ascending: !this.state.ascending
             })
         }
@@ -77,34 +76,33 @@ class LawmakerSummary extends Component {
     
     render() {
         const sortFunction = this.state.ascending ?
-            this.state.sort.function :
-            (a,b) => this.state.sort.function(b,a) // reverses sort
+            this.state.sortColumn.sortFunction :
+            (a,b) => this.state.sortColumn.sortFunction(b,a) // reverses sort
         const lawmakers = this.props.lawmakers
             .sort(sortFunction)
         
         const headers = columns.map(schema => {
 
             let sortClass = styles.colSortable
-            if (schema.sortKey === null) sortClass = styles.colNotSortable
-            if (schema.sortKey === this.state.sort.key && this.state.ascending) sortClass = `${styles.colSortable} ${styles.colActiveSortAsc}`
-            if (schema.sortKey === this.state.sort.key && !this.state.ascending) sortClass = `${styles.colSortable} ${styles.colActiveSortDesc}`
+            // non-sortable column
+            if (schema.sortFunction === null) sortClass = styles.colNotSortable
+            // active sort column, ascending or descending
+            else if (schema.key === this.state.sortColumn.key && this.state.ascending) sortClass = `${styles.colSortable} ${styles.colActiveSortAsc}`
+            else if (schema.key === this.state.sortColumn.key && !this.state.ascending) sortClass = `${styles.colSortable} ${styles.colActiveSortDesc}`
             
-        
-            // let sortGlyph = <span class={styles.sortIcon}>▲▼</span>
-            // console.log(schema.sortKey, isActiveSortColumn)
             return <div
                 key={schema.header}
                 className={`${schema.style}`}
-                onClick={schema.sortKey ? this.handleSort(schema.sortKey) : null}
+                onClick={this.makeSortHandler(schema)}
                 >
                 <span className={sortClass}>{schema.header}</span>
             </div>
         })
-            const rows = lawmakers.map((action,i) => Row(action, i))
-            return (<div className={styles.table}>
-                <div className={styles.header}>{headers}</div>
-                <div className={styles.rowsContainer}>{rows}</div>
-            </div>);
+        const rows = lawmakers.map((action,i) => Row(action, i))
+        return (<div className={styles.table}>
+            <div className={styles.header}>{headers}</div>
+            <div className={styles.rowsContainer}>{rows}</div>
+        </div>);
     }
 }
 
@@ -131,4 +129,4 @@ const Row = (lawmaker, i) => {
     )
 }
 
-export default LawmakerSummary
+export default Table

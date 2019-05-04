@@ -9,6 +9,7 @@ import styles from './BillsProcessViz.module.css';
 import { 
     sortByBillNumber, 
     // getImportantActions, 
+    // getBillSponsor,
     getBillURLId
     } from './../js/handling'
 
@@ -30,8 +31,8 @@ class BillsProcessViz extends Component {
 
 const Row = (bill) => {
     // const actions = getImportantActions(bill)
-    //     .map((action, i) => BillAction(action, i))
-    
+        // .map((action, i) => BillAction(action, i))
+
     return (<div key={bill.identifier} className={styles.row}>
         <div className={styles.statusCol}>
             <BillStatus bill={bill} />
@@ -42,10 +43,10 @@ const Row = (bill) => {
         <div className={styles.titleCol}>
            {bill.title}
         </div>
-        
-        <div className={styles.actionsCol}>
-            {/* {actions} */}
-        </div>
+
+        {/* <div className={styles.actionsCol}>
+            {actions}
+        </div> */}
     </div>)
 }
 

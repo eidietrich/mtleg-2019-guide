@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 
 import DistrictFromAddressForm from '../components/DistrictFromAddressForm'
+import SearchForm from '../components/SearchForm'
 
 import image from './../images/house-floor.jpg'
 
@@ -20,31 +21,47 @@ class AllLawmakersView extends Component {
         this.state = {
             filterLawmakers: [],
             message: null,
+            nameFilter: d => true,
         }
 
-        this.setFilter = this.setFilter.bind(this)
+        this.setDistrictFilter = this.setDistrictFilter.bind(this)
         this.setMessage = this.setMessage.bind(this)
         this.resetFilter = this.resetFilter.bind(this)
+        this.setNameFilter = this.setNameFilter.bind(this)
     }
 
     resetFilter(){
         this.setState({
             filterLawmakers: [],
             message: null,
+            nameFilter: d => true,
         })
     }
 
-    setFilter(lawmakers){
+    setDistrictFilter(lawmakers){
         this.setState({ filterLawmakers: lawmakers})
     }
     setMessage(message){
         this.setState({message: message})
     }
+
+    setNameFilter(input){
+        if (input === '') {
+            // set input to true
+            this.setState({nameFilter: d => true})
+        } else {
+            this.setState({nameFilter: d => d.name.toUpperCase().includes(input.toUpperCase())})
+        }
+    }
     
     render(){
         const lawmakers = this.state.filterLawmakers.length > 0 ? 
-            getAllLawmakers().filter(l => this.state.filterLawmakers.map(d => d.name).includes(l.name)) :
             getAllLawmakers()
+                .filter(l => this.state.filterLawmakers.map(d => d.name).includes(l.name))
+                .filter(this.state.nameFilter)    
+            :
+            getAllLawmakers()
+                .filter(this.state.nameFilter)
         const house = lawmakers
             .filter(d => d.chamber === 'house')
             .sort(sortByDistrict)
@@ -66,11 +83,16 @@ class AllLawmakersView extends Component {
                 <div className="image-credit">Photo by Eliza Wiley</div>
             </div>
             
-            {/* <div className={styles.searchLabel}>Look up lawmaker by name</div>
-            <LawmakerByNameForm setFilter={this.setFilter}/> */}
+
             <div className={styles.searchLabel}>Look up legislative districts by address</div>
-            <DistrictFromAddressForm setFilter={this.setFilter} setMessage={this.setMessage}/>
+            <DistrictFromAddressForm setFilter={this.setDistrictFilter} setMessage={this.setMessage}/>
             <div className={styles.searchMessage}>{this.state.message}</div>
+            
+            <div className={styles.searchLabel}>Search lawmakers by name</div>
+            <SearchForm 
+                handleInput={this.setNameFilter}
+                placeholder='e.g. Greg Hertz'
+            />
 
             <div className={styles.chambers}>
                 <div className={styles.chamber}>

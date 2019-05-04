@@ -27,15 +27,15 @@ const chambers = [
 
 const parties = [
     {
-        label: 'all',
+        label: '',
         filter: lawmaker => true
     },
     {
-        label: 'gop',
+        label: 'Republicans',
         filter: d => d.party === 'R'
     },
     {
-        label: 'dem',
+        label: 'Democrats',
         filter: d => d.party === 'D'
     },
 
@@ -121,7 +121,7 @@ class Home extends Component {
                     ]}
                     initial='all'
                 />
-                <h3>{this.state.chamber.label}</h3>
+                <h3>{this.state.chamber.label} {this.state.party.label}</h3>
                 <LawmakerSummary lawmakers={showLawmakers} />
             </div>
             
