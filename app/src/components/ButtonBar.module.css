@@ -1,11 +1,14 @@
 .buttonBar {
     display: flex;
     flex-wrap: wrap;
+    margin: 0.5rem 0;
 }
 
 .button {
     flex: 1 1 5rem;
     display: inline-block;
+    margin-left: -1px;
+    margin-top: -1px; /* so strokes don't add up */
 }
 
 .active {

@@ -16,21 +16,43 @@ const fNum = format(',')
 
 const chambers = [
     {
-        chamber: 'Montana House',
+        label: 'Montana House',
         chamberLawmakers: getHouseLawmakers
     },
     {
-        chamber: 'Montana Senate',
+        label: 'Montana Senate',
         chamberLawmakers: getSenateLawmakers
     },
+]
+
+const parties = [
+    {
+        label: 'all',
+        filter: lawmaker => true
+    },
+    {
+        label: 'gop',
+        filter: d => d.party === 'R'
+    },
+    {
+        label: 'dem',
+        filter: d => d.party === 'D'
+    },
+
 ]
 
 class Home extends Component {
     constructor(props){
         super(props)
-        this.state = chambers[0]
+        this.state = {
+            chamber: chambers[0],
+            party: parties[0],
+        }
     }
     render(){
+        const showLawmakers = this.state.chamber.chamberLawmakers()
+            .filter(this.state.party.filter)
+        
         return(
         <div>
             
@@ -69,18 +91,38 @@ class Home extends Component {
                         {
                             id: 'house',
                             label: 'Show House',
-                            action: (id) => {this.setState(chambers[0])}
+                            action: (id) => {this.setState({chamber: chambers[0]})}
                         },
                         {
                             id: 'senate',
                             label: 'Show Senate',
-                            action: (id) => {this.setState(chambers[1])},
+                            action: (id) => {this.setState({chamber: chambers[1]})},
                         }
                     ]}
                     initial='house'
                 />
-                <h3>{this.state.chamber}</h3>
-                <LawmakerSummary lawmakers={this.state.chamberLawmakers()} />
+                <ButtonBar
+                    buttons={[
+                        {
+                            id: 'all',
+                            label: 'Show All Lawmakers',
+                            action: (id) => {this.setState({party: parties[0]})}
+                        },
+                        {
+                            id: 'gop',
+                            label: 'Show Republicans',
+                            action: (id) => {this.setState({party: parties[1]})}
+                        },
+                        {
+                            id: 'dem',
+                            label: 'Show Democrats',
+                            action: (id) => {this.setState({party: parties[2]})}
+                        },
+                    ]}
+                    initial='all'
+                />
+                <h3>{this.state.chamber.label}</h3>
+                <LawmakerSummary lawmakers={showLawmakers} />
             </div>
             
         </div>

@@ -9,6 +9,7 @@
 .header {
     display: flex;
     font-size: 0.8em;
+    position: relative;
 }
 
 .rowsContainer {
@@ -94,8 +95,46 @@
     font-style: normal;
     font-weight: normal;
     font-size: 1em;
-    text-align: center;
+    /* text-align: center; */
 }
+
+/* sortable headers w/ icons */
+.colSortable {
+    cursor: pointer;
+    display: block;
+    /* color: brown; */
+}
+
+.colSortable:before {
+    font-size: 1.2em;
+    content: '↕ '
+}
+.colSortable:after {
+    border-top-color: #666;
+	margin-top: 1px;
+}
+
+.colSortable:hover {
+    font-weight: bold;
+}
+.colNotSortable {
+    /* color: blue; */
+}
+.colSortable.colActiveSortAsc {
+    font-weight: bold;
+}
+.colSortable.colActiveSortAsc:before {
+    font-size: 1.2em;
+    content: '↑ '
+}
+.colSortable.colActiveSortDesc {
+    font-weight: bold;
+}
+.colSortable.colActiveSortDesc:before {
+    font-size: 1.2em;
+    content: '↓ '
+}
+    
 
 .action {
     margin-left: 0.2rem;

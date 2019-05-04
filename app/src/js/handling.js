@@ -108,8 +108,12 @@ export const getAllLawmakers = () => lawmakers
 export const getSenateLawmakers = () => lawmakers.filter(l => l.chamber === 'senate')
 export const getHouseLawmakers = () => lawmakers.filter(l => l.chamber === 'house')
 export const sortBySponsorshipCounts = (a,b) => getBillsForLawmaker(b).length - getBillsForLawmaker(a).length
-export const sortByDistrict = (a,b) => +a.district.slice(3,) - +b.district.slice(3,)
 
+export const sortByDistrict = (a,b) => +a.district.slice(3,) - +b.district.slice(3,)
+export const sortByLawmakerName = (a,b) => a.laws_vote_name.localeCompare(b.laws_vote_name)
+export const sortByLawmakerValue = (key) => {
+    return (a,b) => a[key] - b[key]
+}
 
 export const getLawmakerByName = (name) => lawmakers.find(d => d.name === name) 
 export const getLawmakerByDistrict = (district) => {
