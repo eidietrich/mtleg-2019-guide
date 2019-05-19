@@ -4,6 +4,8 @@ class Data {
         this.votes = votes
         this.lawmakers = lawmakers
 
+        console.log("NB: This is now excluding absent votes from calculations")
+
         this.gopCaucus = lawmakers.filter(d => d.party === 'R')
         this.demCaucus = lawmakers.filter(d => d.party === 'D')
     }
@@ -36,6 +38,10 @@ class Data {
     getLawmakerVote(vote, lawmaker) {
         return vote.votes.find(d => d.voter_name === lawmaker.laws_vote_name).option
     }
+    lawmakerVoteAbsent(vote, lawmaker) {
+        const lawmakerVote = this.getLawmakerVote(vote, lawmaker)
+        return (lawmakerVote !== 'yes') && (lawmakerVote !== 'no')
+    }
     lawmakerVoteWithGopCaucus(vote, lawmaker) {
         // assumes caucus vote has been pre-calculated
         const lawmakerVote = this.getLawmakerVote(vote, lawmaker)
@@ -57,18 +63,21 @@ class Data {
     // VOTE SUMMARY AGGREGATION FUNCTIONS
     percentVotesWithMajority(votes, lawmaker) {
         const numVotes = votes.length
+        const absentVotes = votes.filter(vote => this.lawmakerVoteAbsent(vote, lawmaker)).length
         const votesWithMajority = votes.filter(vote => this.lawmakerVoteWithMajority(vote, lawmaker)).length
-        return votesWithMajority / numVotes
+        return votesWithMajority / (numVotes - absentVotes)
     }
     percentVotesWithGopCaucus(votes, lawmaker) {
         const numVotes = votes.length
+        const absentVotes = votes.filter(vote => this.lawmakerVoteAbsent(vote, lawmaker)).length
         const votesWithGop = votes.filter(vote => this.lawmakerVoteWithGopCaucus(vote, lawmaker)).length
-        return votesWithGop / numVotes
+        return votesWithGop / (numVotes - absentVotes)
     }
     percentVotesWithDemCaucus(votes, lawmaker) {
         const numVotes = votes.length
+        const absentVotes = votes.filter(vote => this.lawmakerVoteAbsent(vote, lawmaker)).length
         const votesWithDems = votes.filter(vote => this.lawmakerVoteWithDemCaucus(vote, lawmaker)).length
-        return votesWithDems / numVotes
+        return votesWithDems / (numVotes - absentVotes)
     }
 }
 

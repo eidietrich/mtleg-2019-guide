@@ -8,7 +8,8 @@ import LawmakerSummary from './../components/LawmakerSummary'
 import ButtonBar from './../components/ButtonBar'
 import EmailForm from './../components/EmailForm'
 
-import {getAllBills, getFloorVotes, getHouseLawmakers, getSenateLawmakers, getUpdateDate} from './../js/handling.js'
+import {getAllBills, getFloorVotes, getHouseLawmakers, getSenateLawmakers, getUpdateDate,
+} from './../js/handling.js'
 
 import {format} from 'd3'
 
@@ -121,6 +122,7 @@ class Home extends Component {
                     ]}
                     initial='all'
                 />
+                <div className={styles.note}>The majority vote percentage figure indicates how often the lawmaker has voted with at least half their fellow lawmakers in both parties. Party vote statistics indicate how often the lawmaker has voted with a majority of members in that party's caucus. Statistics represent second reading votes only and exclude votes where individual lawmakers were marked absent.</div>
                 <h3>{this.state.chamber.label} {this.state.party.label}</h3>
                 <LawmakerSummary lawmakers={showLawmakers} />
             </div>

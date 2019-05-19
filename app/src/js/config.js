@@ -57,6 +57,19 @@ module.exports.LEG_NAME_CLEANING = {
   'Fitzgerald, Ross H.' : 'Fitzgerald, Ross',
   'Ellsworth, Jason W.' : 'Ellsworth, Jason',
   'Galloway, Lola' : 'Sheldon-Galloway, Lola',
+  // post-session scrape
+  ' Barrett, Dick': 'Barrett, Dick',
+  ' Blasdel, Mark': 'Blasdel, Mark',
+  ' Cohenour, Jill': 'Cohenour, Jill',
+  ' Gillespie, Bruce': 'Gillespie, Bruce',
+  ' Hoven, Brian': 'Hoven, Brian',
+  ' McClafferty, Edith (Edie)': 'McClafferty, Edith',
+  ' Phillips, Mike': 'Phillips, Mike',
+  ' Pomnichowski, JP': 'Pomnichowski, JP',
+  ' Richmond, Tom': 'Richmond, Tom',
+  ' Tempel, Russel (Russ)': 'Tempel, Russel',
+  ' Webb, Roger': 'Webb, Roger',
+
 
   // for 2017
   'Stewart Peregoy, Sharon': 'Stewart-Peregoy, Sharon',

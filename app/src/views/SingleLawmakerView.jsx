@@ -9,7 +9,10 @@ import ButtonBar from '../components/ButtonBar'
 import styles from './SingleLawmakerView.module.css'
 
 import { cap, getBillsForLawmaker, lawmakerTitle, getSecondReadingVotesForLawmaker,
-     sortVoteByMargin, sortByBillNumber } from '../js/handling'
+     sortVoteByMargin, sortByBillNumber,
+    //  gopCaucusVote, demCaucusVote,
+    
+    } from '../js/handling'
 
 class LawmakerView extends Component {
     constructor(props){
@@ -43,6 +46,7 @@ class LawmakerView extends Component {
             <LawmakerVotesSummary lawmaker={lawmaker} votes={votes} />
             <div className={styles.note}>
                 <p>Statistics calculated for second reading floor votes only. The majority vote percentage figure indicates how often the lawmaker has voted with at least half their fellow lawmakers in both parties. Party vote statistics indicate how often the lawmaker has voted with a majority of members in that party's caucus.</p>
+                <p>Votes here represent second readings. Some bills are subject to multiple rounds of votes in a given chamber, e.g., an initial "do pass" vote in the House and then a "do concur" on a version of the bill with Senate amendments. </p>
             </div>
             <ButtonBar
                 buttons={[

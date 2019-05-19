@@ -7,11 +7,15 @@ Definitions for data management functions
 import {updateDate, bills, votes, lawmakers} from './../data/mtleg-2019.json'
 import { IMPORTANT_ACTIONS, UNIMPORTANT_ACTIONS, BILL_STATUSES } from './../js/config'
 
-import {format} from 'd3'
+import {format, timeFormat, timeParse} from 'd3'
 
 export const percentFormat = format('.0%')
+export const apStyleDate = timeFormat('%b %-d, %Y')
+export const dateFormat = timeFormat('%-m/%-d/%y')
+
+
 export const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)
-export const getUpdateDate = () => updateDate
+export const getUpdateDate = () => apStyleDate(timeParse('%Y-%m-%d')(updateDate))
 export const getCommittees = (bill) => {
     return [...new Set(bill.actions.map(d => d.extras.committee))].filter(d => d !== "")
   }
@@ -159,9 +163,30 @@ export const getMajorFloorVotes = () => {
 }
 
 export const getSecondReadingVotes = () => {
-    const include = ['2nd Reading Passed','2nd Reading Concurred', '2nd Reading Not Passed',
-    '2nd Reading Not Concurred', '2nd Reading Concurred as Amended', '2nd Reading Passed as Amended', '2nd Reading Not Passed as Amended',
-    '2nd Reading Pass Motion Failed', '2nd Reading Concur Motion Failed',
+    const include = [
+        '2nd Reading Passed',
+        '2nd Reading Concurred',
+        '2nd Reading Not Passed',
+        '2nd Reading Not Concurred',
+        '2nd Reading Concurred as Amended',
+        '2nd Reading Passed as Amended', 
+        '2nd Reading Not Passed as Amended',
+        '2nd Reading Pass Motion Failed',
+        '2nd Reading Concur Motion Failed',
+        '2nd Reading Concur as Amended Motion Failed',
+        '2nd Reading Senate Amendments Concurred',
+        '2nd Reading House Amendments Concurred',
+        '2nd Reading Pass as Amended Motion Failed',
+        '2nd Reading Conference Committee Report Adopted',
+        '2nd Reading Free Conference Committee Report Adopted',
+        '2nd Reading Conference Committee Report Adopt Motion Failed',
+        '2nd Reading Governor\'s Proposed Amendments Adopted',
+        '2nd Reading Governor\'s Proposed Amendments Adopt Motion Failed',
+        '2nd Reading Governor\'s Proposed Amendments Not Adopted',
+
+
+        //
+
  ]
     return getFloorVotes().filter(vote => include.includes(vote.bill_action))
 }
