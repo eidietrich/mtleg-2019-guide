@@ -1,0 +1,33 @@
+.logoContainer {
+    font-family: proxima-nova, sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 1.5rem;
+    /* max-width: 12em; */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-bottom: 0.5rem;
+}
+.logoContainer a {
+    display: flex;
+    align-items: flex-end;
+}
+
+.logo {
+    /* height: 2rem; */
+    width: 25vw;
+    min-width: 150px;
+    max-width: 200px;
+    display: inline-block;
+    margin-right: 0.5rem;
+    /* position: relative; */
+    /* top: 1em; */
+}
+
+.title {
+    min-width: 300px;
+    
+    margin-bottom: -4px;
+}

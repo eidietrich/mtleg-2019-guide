@@ -3,7 +3,7 @@
 // Hacky pathing
 var { BILL_STATUSES, IMPORTANT_ACTIONS, UNIMPORTANT_ACTIONS,
     LEG_NAME_CLEANING,
- } = require('../app/src/js/config.js')
+ } = require('../app/src/process/config.js')
 var { 
     getUniqueActions, getUniqueStatuses, getUniqueCategories, getUniqueSubjects,
     getSecondReadingVotesForLawmaker,
@@ -51,6 +51,7 @@ const lawmakerProcessing = (Processor, lawmakers, votes) => {
         lawmaker.percentVotesWithMajority = Processor.percentVotesWithMajority(lawmakerVotes, lawmaker)
         lawmaker.percentVotesWithGopCaucus = Processor.percentVotesWithGopCaucus(lawmakerVotes, lawmaker)
         lawmaker.percentVotesWithDemCaucus = Processor.percentVotesWithDemCaucus(lawmakerVotes, lawmaker)
+        lawmaker.ideologyScore = Processor.ideologyScore(lawmakerVotes, lawmaker)
     })
 }
 const billProcessing = (Processor, bills) => {

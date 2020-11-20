@@ -12,11 +12,6 @@ const { runTests, processing } = require('./data-processing.js')
 const GLOB_BILLS = "./_data/mt/bill_*.json"
 const GLOB_VOTES = "./_data/mt/vote_event_*.json"
 const ROSTER_PATH = './data-static/leg-roster-2019.json'
-// const GLOB_BILLS = "_data/mt-2017/bill_*.json"
-// const GLOB_VOTES = "_data/mt-2017/vote_event_*.json"
-
-// const OUT_PATH_APP_VOTES = 'app/src/data/scrape-2019-votes.json'
-// const OUT_PATH_APP_BILLS = 'app/src/data/scrape-2019-bills.json'
 
 const OUT_PATH_APP = './app/src/data/mtleg-2019.json'
 
@@ -42,10 +37,6 @@ function main(){
     const bills = bill_files.map(getJson)
     const votes = vote_files.map(getJson)
     const lawmakers = getJson(ROSTER_PATH)
-    // const lawmakers = getJson('./processing/leg-roster-2017.json')
-
-    // Processing
-    // console.log(configs)
  
     processing(bills, votes, lawmakers)
     runTests(bills, votes, lawmakers)
@@ -65,8 +56,6 @@ function main(){
         bills: bills,
         lawmakers: lawmakers,
     })
-    // writeJson(OUT_PATH_APP_VOTES, votes)
-    // writeJson(OUT_PATH_APP_BILLS, bills)
 }
   
 main()

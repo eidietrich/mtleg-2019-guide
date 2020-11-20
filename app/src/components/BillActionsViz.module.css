@@ -28,18 +28,14 @@
     
 }
 
-.actionCol{
-    flex: 0 0 3.5rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-}
 
-.descriptionCol {
-    flex: 1 1 15rem;
+
+/* .descriptionCol {
+    
 }
 .dateCol {
-    flex: 0 0 6rem;
-}
+    
+} */
 .bodyCol {
     flex: 0 0 10rem;
 }
@@ -74,3 +70,4 @@
     justify-content: center;
     align-items: center;
 }
+

@@ -1,0 +1,182 @@
+.table {
+    overflow: scroll;
+}
+.tableHeader {
+    display: flex;
+    
+    font-size: 0.8em;
+    align-items: flex-end;
+    padding: 0.2rem;
+}
+.tableHeader .lawmakerVoteCol {
+    font-weight: bold;
+    /* text-transform: uppercase; */
+}
+
+.tableRow {
+    display: flex;
+    /* margin-bottom: 0.4rem; */
+    border-top: 1px solid #666;
+    /* padding: 0.1rem; */
+
+    /* flex-wrap: wrap; */
+}
+.tableRow:hover {
+    background-color: #eee;
+    border-top: 1px solid #000;
+    /* border-bottom: 1px solid #222; */
+    font-weight: bold;
+}
+
+.statusCol {
+    flex: 0 0 9rem;
+    font-size: 0.8rem;
+}
+
+.billCol {
+    flex: 0 1 3.5rem;
+    min-width: 2rem;
+    margin-right: 0.2rem;
+    padding: 0.2rem;
+}
+.billTitleCol {
+    flex: 4 0 6rem;
+    /* margin-right: 0.2rem; */
+    padding: 0.2rem;
+}
+.dateCol {
+    flex: 0 0 6rem;
+    padding: 0.2rem;
+}
+.voteMotionCol {
+    flex: 0.5 0 1rem;
+    margin-right: 0.2rem;
+    padding: 0.2rem;
+}
+@media(max-width: 400px){
+    .voteMotionCol {
+        display: none;
+    }
+}
+.actionCol {
+    flex: 0.5 0 3rem;
+}
+.outcomeCol {
+    flex: 0.5 0 3rem;
+    /* margin-right: 0.2rem; */
+    
+}
+.lawmakerVoteCol{
+    flex: 0.3 0 3rem;
+    margin-right: 0.25rem;
+}
+.compareVoteCol {
+    flex: 0 0 3rem;
+    /* margin-right: 0.2rem; */
+}
+.billSponsorCol {
+    flex: 0.5 0 8rem;
+}
+@media(max-width: 400px){
+    .billSponsorCol {
+        display: none;
+    }
+}
+
+.outcomeCol a {
+    color: #000;
+}
+
+.rowContainer .billCol {
+    font-weight: bold;
+}
+
+.rowContainer .billTitleCol {
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+.rowContainer .voteMotionCol {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.rowContainer .billSponsorCol {
+    font-size: 0.8em;
+    color: #666;
+    padding: 0.2rem;
+}
+
+.rowContainer .dateCol {
+    color: #666;
+}
+.rowContainer .outcomeCol,
+.rowContainer .lawmakerVoteCol,
+.rowContainer .compareVoteCol {
+    /* font-style: italic; */
+    font-size: 0.8em;
+    text-transform: capitalize;
+    /* max-height: 2rem; */
+    border-right: 1px solid #fff;
+    padding: 0.2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rowContainer .lawmakerVoteCol {
+    border-right: none;
+    font-weight: bold;
+}
+
+/* columns for bill actions table */
+.actionCol {
+    flex: 0 0 5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+    padding: 0.2rem;
+}
+.dateCol {
+    flex: 0 0 4rem;
+    
+    padding: 0.2rem;
+}
+
+.locationCol {
+    flex: 0 0 10rem;
+    padding: 0.2rem;
+}
+@media(max-width: 400px){
+    .locationCol {
+        display: none;
+    }
+    .descriptionCol {
+        display: none;
+    }
+
+}
+.descriptionCol {
+    flex: 0 0 15rem;
+    padding: 0.2rem;
+    
+}
+
+.rowContainer .dateCol {
+    /* font-style: italic; */
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.rowContainer .locationCol {
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+.rowContainer .descriptionCol {
+    font-size: 0.8rem;
+}
+
+

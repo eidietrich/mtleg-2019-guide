@@ -4,14 +4,15 @@ import styles from './BillVotesViz.module.css'
 
 import {getBillVotes, sortVoteByBillAndDate, getVoteLawsUrl,
     voteCountText, votePassed,
-    gopCaucusVote, demCaucusVote } from './../js/handling'
+    gopCaucusVote, demCaucusVote } from './../process/handling'
 
 class BillVotesViz extends Component {
     render() {    
-        // const votes = this.props.votes
         const bill = this.props.bill
         const votes = getBillVotes(bill)
             .sort(sortVoteByBillAndDate)
+
+        if (votes.length === 0) return <div>No votes recorded</div>
         const rows = votes.map((vote, i) => Vote(vote, i))
         return (<div className={styles.table}>
             <div className={styles.tableHeader}>
@@ -32,7 +33,6 @@ class BillVotesViz extends Component {
   }
 
 const Vote = (vote, i) => {
-    // console.log(vote)
     const color = (d) => {
         if (d === 'yes') return '#91cf60'
         if (d === 'no') return '#fc8d59'
@@ -44,8 +44,8 @@ const Vote = (vote, i) => {
     const demVote = demCaucusVote(vote)
     return <div key={String(i)}>
         <div className={styles.voteRow}>
-            <div className={styles.dateCol}>{vote.start_date} </div>
-            <div className={styles.descriptionCol}>{vote.bill_action || 'Committee Action'}</div>
+            <div className={styles.dateCol}>{vote.date} </div>
+            <div className={styles.descriptionCol}>{vote.action || 'Committee Action'}</div>
             <div className={styles.outcomeCol}
                 style={{backgroundColor: votePassed(vote) ? '#91cf60' : '#fc8d59'}}>
                 <a href={getVoteLawsUrl(vote)} target="_blank" rel="noopener noreferrer">

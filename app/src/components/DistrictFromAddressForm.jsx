@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import styles from './DistrictFromAddressForm.module.css'
 
-import DistrictMatcher from '../js/DistrictMatcher'
+import DistrictMatcher from '../process/DistrictMatcher'
 
 const defaultAddress = 'e.g. 1301 E 6th Ave, Helena, MT 59601'
 class DistrictFromAddressForm extends Component {

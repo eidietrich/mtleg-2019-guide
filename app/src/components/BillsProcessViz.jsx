@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'gatsby'
 
 import BillStatus from './BillStatus'
 // import BillAction from './BillAction'
 
+import './tableStyles.css';
 import styles from './BillsProcessViz.module.css'; 
 
 import { 
@@ -11,7 +12,7 @@ import {
     // getImportantActions, 
     // getBillSponsor,
     getBillURLId
-    } from './../js/handling'
+    } from '../process/handling'
 
 class BillsProcessViz extends Component {
     render() {
@@ -22,7 +23,7 @@ class BillsProcessViz extends Component {
     
         return (<div className={styles.billProcessViz}>
             <div className={styles.billCount}>Showing {bills.length} bills</div>
-            <div className={styles.rowsContainer}>
+            <div className="rowContainer">
                 {rows}
             </div>
         </div>);
@@ -33,14 +34,14 @@ const Row = (bill) => {
     // const actions = getImportantActions(bill)
         // .map((action, i) => BillAction(action, i))
 
-    return (<div key={bill.identifier} className={styles.row}>
-        <div className={styles.statusCol}>
+    return (<div key={bill.identifier} className="tableRow">
+        <div className="statusCol">
             <BillStatus bill={bill} />
         </div>
-        <div className={styles.idCol}>
+        <div className="billCol">
            <Link to={`/bill/${getBillURLId(bill)}`}>{bill.identifier}</Link>
         </div>
-        <div className={styles.titleCol}>
+        <div className="billTitleCol">
            {bill.title}
         </div>
 

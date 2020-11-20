@@ -13,7 +13,6 @@
     "scrape": "docker-compose run --rm scrape mt bills --scrape",
     "parse": "node processing/scrape-parsing.js",
     "build": "(cd app; npm run build)",
-
     "start": "(cd app; npm run start)",
     "upload": "(cd app; lftp -c \"open sftp://ericdietrich@sftp.flywheelsites.com/mtfpeditor/montana-free-press/apps; mirror -eR track-mtleg-2019/\")"
   },

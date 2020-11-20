@@ -1,34 +1,50 @@
 {
-  "name": "app",
-  "version": "0.1.0",
+  "name": "gatsby-starter-default",
   "private": true,
-  "homepage": "http://www.montanafreepress.org/apps/track-mtleg-2019",
+  "description": "Tracking MT leg",
+  "version": "0.1.0",
+  "author": "Eric Dietrich / MTFP",
   "dependencies": {
-    "d3": "^5.9.1",
-    "d3-format": "^1.3.2",
-    "normalize.css": "^8.0.1",
-    "pym.js": "^1.3.2",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3",
-    "react-ga": "^2.5.7",
-    "react-mailchimp-subscribe": "^2.1.0",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.5",
-    "react-table": "^6.9.2"
+    "d3": "^5.12.0",
+    "gatsby": "^2.17.7",
+    "gatsby-image": "^2.2.30",
+    "gatsby-plugin-google-analytics": "^2.1.23",
+    "gatsby-plugin-manifest": "^2.2.26",
+    "gatsby-plugin-offline": "^2.2.10",
+    "gatsby-plugin-react-helmet": "^3.1.13",
+    "gatsby-plugin-sharp": "^2.2.36",
+    "gatsby-plugin-webpack-size": "0.0.3",
+    "gatsby-source-filesystem": "^2.1.35",
+    "gatsby-transformer-sharp": "^2.3.2",
+    "glob": "^7.1.5",
+    "iltorb": "^2.4.4",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-helmet": "^5.2.1"
   },
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "rm -r ./track-mtleg-2019 && react-scripts --max_old_space_size=4096 build && mv ./build ./track-mtleg-2019",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "node --max_old_space_size=4096 ./node_modules/.bin/gatsby build --prefix-paths && rm -r ./track-mtleg-2019 ||: && mv ./public ./track-mtleg-2019",
+    "build:local": "node --max_old_space_size=4096 ./node_modules/.bin/gatsby build",
+    "upload": "(lftp -c \"open sftp://ericdietrich@sftp.flywheelsites.com/mtfpeditor/montana-free-press/apps; mirror -eR track-mtleg-2019/\")",
+    "develop": "gatsby develop",
+    "format": "prettier --write src/**/*.{js,jsx}",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  }
 }

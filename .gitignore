@@ -1,9 +1,11 @@
+node_modules
+.ipynb_checkpoints/
+
 # Pupa and Billy scraped JSON and Scrapelib-cached webpages
+data
 cache
 _cache
 _data
-NOTES.md
-node_modules
 
 # Setting-overrides that should not be shared
 local_settings.*py
@@ -21,6 +23,8 @@ testdata/html_data
 site/collected_static
 site/openstates
 
+__pycache__
+
 # Python, editor, and operating system artifacts
 *.pyc
 *.DS_Store
@@ -31,8 +35,9 @@ site/openstates
 *.class
 *.jar
 +*.sublime*
-.vscode/
 venv
+.venv/
+.vscode/
 
 # Binary data files and dumps, from Open States and state websites
 openstates.sqlite3
@@ -40,5 +45,6 @@ dump/
 tmp.*
 *.mdb
 *.accdb
+pubinfo_*/
 billydata
 .idea

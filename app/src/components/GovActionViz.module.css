@@ -1,0 +1,21 @@
+.billProcessViz {
+    /* border: 1px solid #eee; */
+    margin-top: 1rem;
+}
+
+.billCount {
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+.legend {
+    margin: 0.5rem 0;
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+}
+
+.legend span {
+    padding: 0.2rem;
+    margin-right: 0.2rem;
+    margin-top: 0.2rem;
+}

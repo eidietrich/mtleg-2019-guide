@@ -2,7 +2,7 @@ import React from 'react'
 
 import styles from './BillAction.module.css'
 
-import { getActionColor, getActionGlyph } from './../js/handling'
+import { getActionColor, getActionGlyph } from './../process/handling'
 
 const BillAction = (action, i) => {
     return <div

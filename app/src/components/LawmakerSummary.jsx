@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'gatsby'
 
 import styles from './LawmakerSummary.module.css';
 
-import { getBillsForLawmaker, getLawmakerUrlName,
-    sortByDistrict, sortByLawmakerName, sortByLawmakerValue,
-    percentVotesWithMajority, percentVotesWithGopCaucus, percentVotesWithDemCaucus,
- } from './../js/handling'
+import { getLawmakerUrlName, percentFormat,
+    sortByDistrict, sortByLawmakerName, sortByLawmakerValue
+ } from './../process/handling'
 
 const columns = [
     {
@@ -25,8 +24,8 @@ const columns = [
     },
     {
         key: 'bills',
-        header: 'Bills',
-        content: d => getBillsForLawmaker(d).length,
+        header: 'Bills sponsored',
+        content: d => d.numSponsoredBills,
         
         style: styles.billNumCol,
         sortFunction: null,
@@ -34,21 +33,21 @@ const columns = [
     {
         key: 'majorityVote',
         header: 'Votes with majority of body',
-        content: d => percentVotesWithMajority('', d),
+        content: d => percentFormat(d.percentVotesWithMajority),
         style: styles.votePercentCol,
         sortFunction: sortByLawmakerValue('percentVotesWithMajority'),
     },
     {
         key: 'gopVote',
         header: 'Votes with GOP caucus',
-        content: d => percentVotesWithGopCaucus('', d),
+        content: d => percentFormat(d.percentVotesWithGopCaucus),
         style: styles.votePercentCol,
         sortFunction: sortByLawmakerValue('percentVotesWithGopCaucus'),
     },
     {
         key: 'demVote',
         header: 'Votes with Dem. caucus',
-        content: d => percentVotesWithDemCaucus('', d),
+        content: d => percentFormat(d.percentVotesWithDemCaucus),
         style: styles.votePercentCol,
         sortFunction: sortByLawmakerValue('percentVotesWithDemCaucus'),
     },

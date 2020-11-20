@@ -4,7 +4,7 @@ class Data {
         this.votes = votes
         this.lawmakers = lawmakers
 
-        console.log("NB: This is now excluding absent votes from calculations")
+        // console.log("NB: This is now excluding absent votes from calculations")
 
         this.gopCaucus = lawmakers.filter(d => d.party === 'R')
         this.demCaucus = lawmakers.filter(d => d.party === 'D')
@@ -59,6 +59,32 @@ class Data {
         //     vote.result, '\n', vote.votes.map(d => ({name: d.voter_name, opt: d.option}) ))
         return lawmakerVote === vote.result
     }
+    lawmakerVoteWithParty(vote, lawmaker) {
+        // assumes caucus vote has been pre-calculated
+        const lawmakerVote = this.getLawmakerVote(vote, lawmaker)
+        if (lawmaker.party === 'R') return (lawmakerVote === vote.gopCaucus.caucus)
+        if (lawmaker.party === 'D') return (lawmakerVote === vote.demCaucus.caucus)
+    }
+    lawmakerVoteIdeologyScore(vote, lawmaker) {
+        // see below for logic
+        const lawmakerVote = this.getLawmakerVote(vote, lawmaker)
+        const gopVote = vote.gopCaucus.caucus
+        const demVote = vote.demCaucus.caucus
+
+        let partyFactor = (lawmaker.party === 'D') ? -1 : 1;
+
+        // handle absent votes
+        if ((lawmakerVote !== 'yes') && (lawmakerVote !== 'no')) return 0
+       
+        if (gopVote === demVote) { // non-disputed vote
+            if (gopVote === lawmakerVote) return partyFactor * 0 // lawmaker agrees with both
+            if (gopVote !== lawmakerVote) return partyFactor * 2 // lawmaker bucks both
+        } else if (gopVote !== demVote) { // disputed vote
+            const voteWithParty = this.lawmakerVoteWithParty(vote, lawmaker)
+            if (voteWithParty) return partyFactor * 1
+            else if (!voteWithParty) return partyFactor * -1
+        }
+    }
 
     // VOTE SUMMARY AGGREGATION FUNCTIONS
     percentVotesWithMajority(votes, lawmaker) {
@@ -78,6 +104,24 @@ class Data {
         const absentVotes = votes.filter(vote => this.lawmakerVoteAbsent(vote, lawmaker)).length
         const votesWithDems = votes.filter(vote => this.lawmakerVoteWithDemCaucus(vote, lawmaker)).length
         return votesWithDems / (numVotes - absentVotes)
+    }
+    // Ideology score - negative is farther left, positive farther right
+    /* Logic
+    - Both parties support
+        - Lawmaker supports --> 0
+        - Lawmakers opooses --> +2
+    - Lawmaker party supports, other opposes
+        - Lawmaker supports --> +1
+        - Lawmaker opposes --> -1
+    - Lawmaker party opposes, other supports
+        - Lawmaker supports --> -1
+        - Lawmaker opposes --> +1
+    - Both parties oppose
+        - Lawmaker supports --> +2
+        - Lawmaker opposes --> 0
+    */
+    ideologyScore(votes, lawmaker) {
+        return votes.reduce((acc, vote) => this.lawmakerVoteIdeologyScore(vote, lawmaker) + acc, 0)
     }
 }
 

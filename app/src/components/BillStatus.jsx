@@ -2,7 +2,7 @@ import React from 'react'
 
 import styles from './BillStatus.module.css'
 
-import { getBillStatus } from './../js/handling'
+import { getBillStatus } from '../process/handling'
 
 const BillStatus = (props) => {
     const bill = props.bill
