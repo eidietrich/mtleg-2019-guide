@@ -7,7 +7,7 @@ const fs = require('fs')
 const glob = require('glob')
 const moment = require('moment')
 
-const { runTests, processing } = require('./data-processing.js')
+const { runTests, processing } = require('./process.js')
 
 const GLOB_BILLS = "./_data/mt/bill_*.json"
 const GLOB_VOTES = "./_data/mt/vote_event_*.json"

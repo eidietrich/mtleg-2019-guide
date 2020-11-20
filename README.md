@@ -33,7 +33,7 @@ Writes to `_cache` and `_data` folders (left untracked by version control).
 or
 ```node processing/scrape-parsing.js```
 
-Pulls results of scrape from `./_data/mt/`, does some cleaning/processing and produces a single file for the front-end to draw from at `./app/src/data/mtleg-2019.json`.
+Pulls results of scrape from `./_data/mt/`, does some cleaning/processing and produces a single file for the front-end to draw from at `./app/src/data/mtleg-2019.json`. Note that this relies on config options set in  `/app/src/process/config.js` (e.g. lawmaker names that need cleaning) -- config file has a strange location so it can also be referenced by the front-end app.
 
 Also writes files to `./analysis` directory, intended for one-off exploratory analyses and data reporting for separate projects. There are some messy Jupyter notebooks in that folder that probably should be dropped from the repo.
 

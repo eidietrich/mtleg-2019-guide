@@ -95,6 +95,7 @@ module.exports.LEG_NAME_CLEANING = {
   ' Richmond, Tom': 'Richmond, Tom',
   ' Tempel, Russel (Russ)': 'Tempel, Russel',
   ' Webb, Roger': 'Webb, Roger',
+  'Welborn, Jeffery': 'Welborn, Jeffrey',
 
 
   // for 2017
@@ -253,6 +254,14 @@ module.exports.IMPORTANT_ACTIONS = [
   {key: 'Taken from 3rd Reading; Placed on 2nd Reading', color: '#ffffbf',  glyph: '', status: '',},
   {key: 'Reconsidered Previous Action; Remains in 3rd Reading Process', color: '#ffffbf', glyph: '', status: '',},
   {key: 'Taken from 2nd Reading; Rereferred to Committee', color: '#ffffbf', glyph: '', status: '',},
+
+  {key: 'Committee Executive Action--Resolution Adopted', color: '#ffffbf', glyph: '', status: '',},
+  {key: 'Committee Executive Action--Resolution Adopted as Amended', color: '#ffffbf', glyph: '', status: '',},
+  {key: 'Committee Report--Resolution Adopted', color: '#ffffbf', glyph: '', status: '',},
+  {key: 'Committee Report--Resolution Adopted as Amended', color: '#ffffbf', glyph: '', status: '',},
+  {key: 'Missed Deadline for Revenue Estimating Resolution Transmittal', color: '#ffffbf', glyph: '', status: '',},
+  {key: 'Resolution Adopted', color: '#ffffbf', glyph: '', status: '',},
+  {key: 'Rules Suspended to Accept Late Transmittal of Bill', color: '#ffffbf', glyph: '', status: '',},
 ]
 
 module.exports.UNIMPORTANT_ACTIONS = [
