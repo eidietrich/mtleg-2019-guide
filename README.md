@@ -9,11 +9,11 @@ Adapted from the OpenStates project's [Montana scrapers](https://github.com/open
 - `/scrapers` - OpenStates scraping code for Montana Legislature.
 - `/analysis` - (messy) code for one-off data exploration
 - `/processing` - Python scripts for cleaning and prepping scraped data
-- `/app` - Gatsby front end
+- `/app` - Gatsby front end.
 - `/data-static` - Static data inputs (hand-curated legislative rosters)
 - `/data-processed` - Data files out of processing step
 
-Note that it would have been better practice to separate front-end repo from scraping/data management.
+Note that it would have been better practice to separate front-end repo entirely from scraping/data management.
 
 
 ## Commands
@@ -47,7 +47,7 @@ Fires up local Gatsby development server. Docker isn't necessary for this.
 ### Build for deployment
 ```npm run build``` or ```(cd app; npm run build)```
 
-Builds to XXX directory
+Builds to `app/track-mtleg-2019` (outside version control).
 
 ### Deployment
 (Outdated since MTFP non longer uses Flywheel as the hosting service for our Wordpress site. We also now host standalone web app builds in an Amazon S3 bucket)
