@@ -55,6 +55,7 @@ Builds to `app/track-mtleg-2019` (outside version control).
 or 
 ```
 (cd app; lftp -c \"open sftp://ericdietrich@sftp.flywheelsites.com/mtfpeditor/montana-free-press/apps; mirror -eR track-mtleg-2019/\")
+
 ```
 
 ## Other notes
